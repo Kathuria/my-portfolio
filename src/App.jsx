@@ -101,32 +101,174 @@ export default function Portfolio() {
 
   const renderContent = () => {
     switch(activeSection) {
-      case 'about':
+      case 'journey':
         return (
           <div className="min-h-screen overflow-auto bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50">
             <div className="max-w-6xl mx-auto px-6 py-20">
-              <div className="mb-12">
-                <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-xl rounded-full shadow-lg mb-6">
-                  <Sparkles className="text-violet-600" size={20} />
-                  <span className="text-violet-600 font-semibold">Available for opportunities</span>
+              <h1 className="text-5xl font-bold mb-12 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+                My Career Journey
+              </h1>
+
+              <div className="space-y-8 relative">
+                <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-violet-600 via-purple-600 to-fuchsia-600"></div>
+                
+                <div className="relative pl-20">
+                  <div className="absolute left-4 top-6 w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-purple-600 border-4 border-violet-50 flex items-center justify-center">
+                    <Briefcase className="text-white" size={18} />
+                  </div>
+                  <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-white/20 hover:shadow-2xl transition-all">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-800">Senior Associate L2 - Technical Lead</h3>
+                        <p className="text-violet-600 font-semibold">Publicis Sapient</p>
+                      </div>
+                      <span className="text-sm text-gray-600 bg-violet-100 px-4 py-2 rounded-full">Mar 2022 - Present</span>
+                    </div>
+                    <p className="text-gray-700 mb-3">Dallas, TX, USA</p>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex gap-2"><span className="text-violet-600">▸</span> Leading full-stack development for enterprise investment banking platform</li>
+                      <li className="flex gap-2"><span className="text-violet-600">▸</span> Reduced page load times by 40% through optimization techniques</li>
+                      <li className="flex gap-2"><span className="text-violet-600">▸</span> Mentoring 15+ developers and establishing development standards</li>
+                      <li className="flex gap-2"><span className="text-violet-600">▸</span> Achieved 80%+ code coverage with comprehensive testing strategy</li>
+                    </ul>
+                  </div>
                 </div>
-                <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
-                  Avi Kathuria
-                </h1>
-                <p className="text-3xl text-gray-700 mb-4">Technical Lead & React Specialist</p>
-                <p className="text-xl text-gray-600">Chandigarh, India • 10+ Years Experience</p>
+
+                <div className="relative pl-20">
+                  <div className="absolute left-4 top-6 w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-600 border-4 border-purple-50 flex items-center justify-center">
+                    <Code className="text-white" size={18} />
+                  </div>
+                  <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-white/20 hover:shadow-2xl transition-all">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-800">Senior Associate L1</h3>
+                        <p className="text-purple-600 font-semibold">Publicis Sapient</p>
+                      </div>
+                      <span className="text-sm text-gray-600 bg-purple-100 px-4 py-2 rounded-full">Nov 2019 - Feb 2022</span>
+                    </div>
+                    <p className="text-gray-700 mb-3">Noida, India</p>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex gap-2"><span className="text-purple-600">▸</span> Created high-performance web applications with improved accessibility</li>
+                      <li className="flex gap-2"><span className="text-purple-600">▸</span> Received positive feedback from 95% of users</li>
+                      <li className="flex gap-2"><span className="text-purple-600">▸</span> Accelerated development cycles by 20% using Webpack optimization</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="relative pl-20">
+                  <div className="absolute left-4 top-6 w-9 h-9 rounded-full bg-gradient-to-br from-fuchsia-600 to-pink-600 border-4 border-fuchsia-50 flex items-center justify-center">
+                    <Terminal className="text-white" size={18} />
+                  </div>
+                  <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-white/20 hover:shadow-2xl transition-all">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-800">Associate Experience Technology L2</h3>
+                        <p className="text-fuchsia-600 font-semibold">Publicis Sapient</p>
+                      </div>
+                      <span className="text-sm text-gray-600 bg-fuchsia-100 px-4 py-2 rounded-full">Jan 2018 - Nov 2019</span>
+                    </div>
+                    <p className="text-gray-700 mb-3">Noida, India</p>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex gap-2"><span className="text-fuchsia-600">▸</span> Built reusable component library with modular design patterns</li>
+                      <li className="flex gap-2"><span className="text-fuchsia-600">▸</span> Implemented responsive SPA framework architecture</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="relative pl-20">
+                  <div className="absolute left-4 top-6 w-9 h-9 rounded-full bg-gradient-to-br from-pink-600 to-rose-600 border-4 border-pink-50 flex items-center justify-center">
+                    <Sparkles className="text-white" size={18} />
+                  </div>
+                  <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-white/20 hover:shadow-2xl transition-all">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-800">Associate QA Engineer</h3>
+                        <p className="text-pink-600 font-semibold">Sapient Global Markets</p>
+                      </div>
+                      <span className="text-sm text-gray-600 bg-pink-100 px-4 py-2 rounded-full">Jan 2016 - Jan 2018</span>
+                    </div>
+                    <p className="text-gray-700 mb-3">Noida, India</p>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex gap-2"><span className="text-pink-600">▸</span> Designed test scripts and found 120+ bugs during testing</li>
+                      <li className="flex gap-2"><span className="text-pink-600">▸</span> Improved system stability by 15%</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="relative pl-20">
+                  <div className="absolute left-4 top-6 w-9 h-9 rounded-full bg-gradient-to-br from-rose-600 to-red-600 border-4 border-rose-50 flex items-center justify-center">
+                    <Rocket className="text-white" size={18} />
+                  </div>
+                  <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-white/20 hover:shadow-2xl transition-all">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-800">Software Trainee</h3>
+                        <p className="text-rose-600 font-semibold">Aricent</p>
+                      </div>
+                      <span className="text-sm text-gray-600 bg-rose-100 px-4 py-2 rounded-full">Jan 2015 - Jun 2015</span>
+                    </div>
+                    <p className="text-gray-700 mb-3">Gurgaon, India</p>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex gap-2"><span className="text-rose-600">▸</span> Developed Android mobile applications</li>
+                      <li className="flex gap-2"><span className="text-rose-600">▸</span> Gained foundation in mobile development and API integration</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-12 bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-white/20">
+                <h2 className="text-2xl font-bold mb-4 text-gray-800">Education & Certifications</h2>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-violet-600">Bachelor of Technology - Computer Science</h3>
+                    <p className="text-gray-700">Chandigarh Group of Colleges, Punjab, India (2011-2015)</p>
+                  </div>
+                  <div className="flex flex-wrap gap-3 mt-4">
+                    <span className="px-4 py-2 bg-gradient-to-r from-violet-100 to-purple-100 text-violet-700 rounded-full font-semibold">SAFe 6 Agilist</span>
+                    <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-700 rounded-full font-semibold">OCI Certified Architect</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'about':
+        return (
+          <div className="min-h-screen overflow-auto bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+            <div className="max-w-6xl mx-auto px-6 py-20">
+              <div className="mb-12">
+                <div className="flex items-center gap-8 mb-8">
+                  <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition"></div>
+                    <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white text-5xl font-bold shadow-2xl">
+                      AK
+                    </div>
+                  </div>
+                  <div>
+                    <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-xl rounded-full shadow-lg mb-4">
+                      <Sparkles className="text-blue-600" size={20} />
+                      <span className="text-blue-600 font-semibold">Available for opportunities</span>
+                    </div>
+                    <h1 className="text-6xl font-bold mb-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                      Avi Kathuria
+                    </h1>
+                    <p className="text-3xl text-gray-700 mb-2">Technical Lead & React Specialist</p>
+                    <p className="text-xl text-gray-600">📍 Chandigarh, India • 🚀 10+ Years Experience</p>
+                  </div>
+                </div>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-white/20 hover:shadow-2xl transition-all hover:-translate-y-1">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
                       <Briefcase className="text-white" size={24} />
                     </div>
                     <h2 className="text-2xl font-bold text-gray-800">Current Role</h2>
                   </div>
                   <p className="text-gray-700 leading-relaxed">
-                    <strong className="text-violet-600">Publicis Sapient</strong> - Leading full-stack development for enterprise 
+                    <strong className="text-blue-600">Publicis Sapient</strong> - Leading full-stack development for enterprise 
                     investment banking platforms serving thousands of users with 99.9% uptime. Reduced page load times by 40% 
                     and mentor 15+ developers.
                   </p>
@@ -134,22 +276,22 @@ export default function Portfolio() {
 
                 <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-white/20 hover:shadow-2xl transition-all hover:-translate-y-1">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
                       <Zap className="text-white" size={24} />
                     </div>
                     <h2 className="text-2xl font-bold text-gray-800">Impact</h2>
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-violet-600"></div>
+                      <div className="w-2 h-2 rounded-full bg-blue-600"></div>
                       <span className="text-gray-700">40% faster page loads</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-purple-600"></div>
+                      <div className="w-2 h-2 rounded-full bg-indigo-600"></div>
                       <span className="text-gray-700">80%+ code coverage</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-fuchsia-600"></div>
+                      <div className="w-2 h-2 rounded-full bg-purple-600"></div>
                       <span className="text-gray-700">60% faster deployments</span>
                     </div>
                   </div>
@@ -160,7 +302,7 @@ export default function Portfolio() {
                 <h2 className="text-2xl font-bold mb-6 text-gray-800">Core Expertise</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {['React', 'TypeScript', 'Node.js', 'Next.js', 'AWS', 'GraphQL', 'Microservices', 'CI/CD'].map((skill, idx) => (
-                    <div key={idx} className="px-4 py-3 bg-gradient-to-br from-violet-100 to-purple-100 rounded-xl text-center font-semibold text-violet-700 hover:scale-105 transition-transform">
+                    <div key={idx} className="px-4 py-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl text-center font-semibold text-blue-700 hover:scale-105 transition-transform">
                       {skill}
                     </div>
                   ))}
@@ -169,7 +311,7 @@ export default function Portfolio() {
 
               <div className="flex flex-wrap gap-4">
                 <a href="mailto:avikathuria21@gmail.com" 
-                   className="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2">
+                   className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2">
                   <Mail size={20} />
                   Get in Touch
                 </a>
@@ -178,7 +320,7 @@ export default function Portfolio() {
                   <Linkedin size={20} />
                   LinkedIn
                 </a>
-                <a href="https://github.com/Kathuria" target="_blank" rel="noopener noreferrer"
+                <a href="https://kathuria.github.io/" target="_blank" rel="noopener noreferrer"
                    className="px-8 py-4 bg-white/80 backdrop-blur-xl text-gray-800 rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 border border-gray-200">
                   <Github size={20} />
                   GitHub
@@ -287,7 +429,7 @@ export default function Portfolio() {
 
   if (activeSection) {
     return (
-      <div className="fixed inset-0 bg-white z-50">
+      <div className="inset-0 bg-white z-50">
         <button
           onClick={() => setActiveSection(null)}
           className="fixed top-6 right-6 z-50 w-14 h-14 rounded-2xl bg-gray-900/90 backdrop-blur-xl text-white flex items-center justify-center hover:bg-gray-900 transition-all shadow-2xl hover:scale-110"
@@ -357,10 +499,10 @@ export default function Portfolio() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <button
-              onClick={() => setActiveSection('about')}
+              onClick={() => setActiveSection('journey')}
               className="px-8 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-2xl font-semibold hover:shadow-2xl hover:shadow-violet-500/50 hover:scale-105 transition-all"
             >
-              Explore My Journey
+              View Career Timeline
             </button>
             <a href="mailto:avikathuria21@gmail.com"
                className="px-8 py-4 bg-white/10 backdrop-blur-xl rounded-2xl font-semibold border border-white/20 hover:bg-white/20 hover:scale-105 transition-all">
@@ -373,7 +515,33 @@ export default function Portfolio() {
       <section className="relative px-6 pb-20">
         <div className="container mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {sections.map((section) => {
+            {sections.slice(0, 4).map((section) => {
+              const Icon = section.icon;
+              return (
+                <button
+                  key={section.id}
+                  onClick={() => setActiveSection(section.id)}
+                  className="group relative overflow-hidden bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 hover:border-white/30 transition-all hover:scale-105 hover:shadow-2xl"
+                >
+                  <div className="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity">
+                    <img src={section.image} alt="" className="w-full h-full object-cover" />
+                  </div>
+                  
+                  <div className={`absolute inset-0 bg-gradient-to-br ${section.gradient} opacity-80 group-hover:opacity-90 transition-opacity`}></div>
+                  
+                  <div className="relative p-8 h-64 flex flex-col items-center justify-center text-center">
+                    <Icon size={64} className="text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform" />
+                    <h3 className="text-3xl font-bold text-white mb-2">{section.title}</h3>
+                    <p className="text-white/90 text-base">{section.subtitle}</p>
+                    
+                    <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ExternalLink size={20} className="text-white" />
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+            {sections.slice(4).map((section, idx) => {
               const Icon = section.icon;
               return (
                 <button
