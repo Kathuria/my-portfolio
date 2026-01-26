@@ -325,7 +325,7 @@ export default function Portfolio() {
                className="w-11 h-11 rounded-xl bg-blue-600/20 backdrop-blur-xl border border-blue-500/30 flex items-center justify-center hover:bg-blue-600/30 transition-all hover:scale-110">
               <Linkedin size={20} />
             </a>
-            <a href="https://kathuria.github.io/" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/Kathuria" target="_blank" rel="noopener noreferrer"
                className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
               <Github size={20} />
             </a>
@@ -387,10 +387,10 @@ export default function Portfolio() {
                   
                   <div className={`absolute inset-0 bg-gradient-to-br ${section.gradient} opacity-80 group-hover:opacity-90 transition-opacity`}></div>
                   
-                  <div className="relative p-8 h-64 flex flex-col justify-end">
-                    <Icon size={48} className="text-white mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform" />
-                    <h3 className="text-2xl font-bold text-white mb-1">{section.title}</h3>
-                    <p className="text-white/80 text-sm">{section.subtitle}</p>
+                  <div className="relative p-8 h-64 flex flex-col items-center justify-center text-center">
+                    <Icon size={64} className="text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform" />
+                    <h3 className="text-3xl font-bold text-white mb-2">{section.title}</h3>
+                    <p className="text-white/90 text-base">{section.subtitle}</p>
                     
                     <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                       <ExternalLink size={20} className="text-white" />
