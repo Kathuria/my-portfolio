@@ -541,7 +541,7 @@ export default function Portfolio() {
                 </button>
               );
             })}
-            {sections.slice(4).map((section, idx) => {
+            {sections.slice(4).map((section) => {
               const Icon = section.icon;
               return (
                 <button
