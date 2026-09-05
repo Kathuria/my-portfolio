@@ -1,2 +1,85 @@
 /* ./src/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Satisfy&display=swap');
 @import "tailwindcss";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.story-path-text {
+  fill: rgba(237, 230, 214, 0.29);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.universe-plate {
+  position: absolute;
+  z-index: 1;
+  left: clamp(1.5rem, 6.5vw, 7.5rem);
+  bottom: clamp(4.25rem, calc(10vh + 1.25rem), 9.25rem);
+  max-width: min(50rem, calc(100vw - 3rem));
+  color: #f7f1e6;
+}
+
+.universe-scrim {
+  position: absolute;
+  z-index: -1;
+  inset: -45% -30% -55%;
+  background: radial-gradient(closest-side ellipse, rgba(11, 14, 20, 0.94), rgba(11, 14, 20, 0.67) 50%, transparent 100%);
+}
+
+.universe-kicker,
+.universe-byline {
+  margin: 0 0 0 0.4rem;
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: rgba(247, 241, 230, 0.64);
+}
+
+.universe-plate h1 {
+  margin: 0.35rem 0 1.25rem;
+  font-family: 'Satisfy', cursive;
+  font-size: clamp(4.8rem, 12vw, 10.5rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.78;
+}
+
+.universe-plate h1 span { display: block; }
+.universe-plate h1 span + span { margin-left: 0.07em; color: #d4a948; }
+
+@media (max-width: 640px) {
+  .story-path-text { font-size: 11px; letter-spacing: 2px; }
+  .universe-plate { bottom: 6.75rem; }
+  .universe-plate h1 { font-size: clamp(4.3rem, 24vw, 7rem); }
+  .universe-byline { max-width: 16rem; }
+}
+
+/* Slim, quiet scrollbar for the detail panel */
+aside::-webkit-scrollbar {
+  width: 6px;
+}
+aside::-webkit-scrollbar-thumb {
+  background: rgba(36, 26, 6, 0.25);
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
