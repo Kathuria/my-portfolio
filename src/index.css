@@ -1,5 +1,5 @@
 /* ./src/style.css */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fuggles&family=Inspiration&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 html,
@@ -50,21 +50,56 @@ body {
 
 .universe-plate h1 {
   margin: 0.35rem 0 1.25rem;
-  font-family: 'Satisfy', cursive;
-  font-size: clamp(4.8rem, 12vw, 10.5rem);
   font-weight: 400;
-  letter-spacing: -0.04em;
-  line-height: 0.78;
+  letter-spacing: -0.02em;
+  line-height: 0.85;
 }
 
 .universe-plate h1 span { display: block; }
-.universe-plate h1 span + span { margin-left: 0.07em; color: #d4a948; }
+.universe-plate h1 span:first-child {
+  font-family: 'Fuggles', cursive;
+  font-size: clamp(5.2rem, 13vw, 11rem);
+}
+.universe-plate h1 span:last-child {
+  font-family: 'Inspiration', cursive;
+  font-size: clamp(4.4rem, 11.5vw, 9.5rem);
+  margin-left: 0.12em;
+  color: #d4a948;
+}
+
+/* Slow, single-direction floating name lanes — never reverses (no
+   boomerang), sized and paced so each name is readable as it drifts by. */
+.name-lane {
+  position: absolute;
+  left: var(--lane-x);
+  bottom: -3rem;
+  white-space: nowrap;
+  font-family: 'Fraunces', 'Noto Sans', ui-sans-serif, sans-serif;
+  font-size: clamp(1.15rem, 2.4vw, 1.7rem);
+  font-weight: 500;
+  color: rgba(237, 230, 214, 0.16);
+  animation: nameFloat var(--lane-duration) linear infinite;
+  animation-delay: var(--lane-delay);
+}
+
+@keyframes nameFloat {
+  0% { transform: translateY(0); opacity: 0; }
+  8% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: translateY(-118vh); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-lane { animation: none; opacity: 0; }
+}
 
 @media (max-width: 640px) {
   .story-path-text { font-size: 11px; letter-spacing: 2px; }
   .universe-plate { bottom: 6.75rem; }
-  .universe-plate h1 { font-size: clamp(4.3rem, 24vw, 7rem); }
+  .universe-plate h1 span:first-child { font-size: clamp(4.6rem, 26vw, 7.5rem); }
+  .universe-plate h1 span:last-child { font-size: clamp(3.8rem, 22vw, 6.4rem); }
   .universe-byline { max-width: 16rem; }
+  .name-lane { font-size: 1rem; }
 }
 
 .badge-star {

@@ -6,25 +6,83 @@ const WAVES = [
   'M-90 715 C180 555 355 830 610 680 S1080 515 1360 700 S1660 835 1810 625',
 ];
 
+// Avi's name in the languages of the places and people this site touches.
+// Left side of each pair is only a label for future editors — the string on
+// the right is the one that renders, exactly as given, unchanged.
+const NAMES = [
+  ['Hindi / Marathi', 'अवी कथूरिया'],
+  ['English', 'Avi Kathuria'],
+  ['Bengali', 'অমি কথুরিয়া'],
+  ['Mandarin', '阿维·卡图里亚'],
+  ['Telugu', 'అవి కథూరియా'],
+  ['Russian', 'Ави Катурия'],
+  ['Tamil', 'அவி கதுரியா'],
+  ['Arabic', 'آفي كاثوريا'],
+  ['Gujarati', 'અવી કથુરિયા'],
+  ['Kannada', 'ಅವಿ ಕಥೂರಿಯಾ'],
+  ['Urdu', 'اوی کتھوریا'],
+  ['Odia', 'ଅଭି କଥୁରିଆ'],
+  ['Malayalam', 'അവി കതൂരിയ'],
+].map(([, value]) => value);
+
+// A handful of lanes, each slowly and continuously drifting upward (never
+// reversing — no boomerang) and cycling through the name list over time, so
+// only a few are ever on screen at once and each stays put long enough to
+// actually read, following the same "few things, slow, legible" spirit as
+// tholman.com's background rather than a fast dense ticker.
+const LANES = [
+  { x: '8%', duration: 46, delay: -6 },
+  { x: '32%', duration: 58, delay: -30 },
+  { x: '58%', duration: 50, delay: -18 },
+  { x: '82%', duration: 62, delay: -42 },
+];
+
+function NameLane({ x, duration, delay, startIndex }) {
+  const ref = useRef(null);
+  const indexRef = useRef(startIndex);
+
+  useEffect(() => {
+    if (ref.current) ref.current.textContent = NAMES[indexRef.current % NAMES.length];
+  }, []);
+
+  const onIteration = () => {
+    indexRef.current += 1;
+    if (ref.current) ref.current.textContent = NAMES[indexRef.current % NAMES.length];
+  };
+
+  return (
+    <span
+      ref={ref}
+      className="name-lane"
+      style={{ '--lane-x': x, '--lane-duration': `${duration}s`, '--lane-delay': `${delay}s` }}
+      onAnimationIteration={onIteration}
+    />
+  );
+}
+
 export default function BackgroundStory() {
   const textPathRefs = useRef([]);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion) return undefined;
 
-    // Nudge each line of text slowly along its own wave path so the
-    // background keeps a quiet sense of motion, not just static labels.
-    const baseOffsets = [7, 15, 22];
-    const speeds = [0.0025, -0.0018, 0.0032]; // percent per ms, opposing directions
+    // Each line drifts slowly in one constant direction and wraps around —
+    // no back-and-forth. Percent-per-second keeps it independent of frame
+    // rate; a full loop takes several minutes, which is what makes it
+    // readable instead of a fast ticker.
+    const speeds = [0.09, -0.06, 0.12]; // % per second, mixed directions across lines
+    const offsets = [7, 15, 22];
+    let last = performance.now();
     let frame;
 
-    function tick(t) {
+    function tick(now) {
+      const dt = (now - last) / 1000;
+      last = now;
       textPathRefs.current.forEach((el, i) => {
         if (!el) return;
-        const span = 40; // drift within a 40%-wide band so text never fully exits
-        const offset = baseOffsets[i] + span * 0.5 * Math.sin(t * speeds[i]);
-        el.setAttribute('startOffset', `${offset}%`);
+        offsets[i] = ((offsets[i] + speeds[i] * dt) % 100 + 100) % 100;
+        el.setAttribute('startOffset', `${offsets[i]}%`);
       });
       frame = requestAnimationFrame(tick);
     }
@@ -55,14 +113,18 @@ export default function BackgroundStory() {
                 href={`#story-wave-${index}`}
                 startOffset={index === 1 ? '15%' : '7%'}
               >
-                {index === 0 && 'BUILD · REACT · TYPESCRIPT · NODE.JS · NEXT.JS · AWS · GRAPHQL · MICROSERVICES · CI/CD'}
-                {index === 1 && 'EXPLORE · LEVEL 8 LOCAL GUIDE · 10,000+ CONTRIBUTIONS · 52M+ PHOTO VIEWS · PLACES DOCUMENTED'}
-                {index === 2 && 'SHARE · TRAVELER · PHOTOGRAPHER · YOUTUBE · TRIBUTE TO INDIA · AI ENTHUSIAST'}
+                {index === 0 && 'BUILD · REACT · TYPESCRIPT · NODE.JS · AWS'}
+                {index === 1 && 'EXPLORE · LEVEL 8 LOCAL GUIDE · 52M+ PHOTO VIEWS'}
+                {index === 2 && 'SHARE · TRAVELER · PHOTOGRAPHER · AI ENTHUSIAST'}
               </textPath>
             </text>
           </g>
         ))}
       </svg>
+
+      {LANES.map((lane, i) => (
+        <NameLane key={lane.x} x={lane.x} duration={lane.duration} delay={lane.delay} startIndex={i * 3} />
+      ))}
 
       <div className="universe-plate">
         <div className="universe-scrim" />

@@ -5,6 +5,7 @@ import UniverseGraph from './components/UniverseGraph.jsx';
 import DetailPanel from './components/DetailPanel.jsx';
 import IntroOverlay from './components/IntroOverlay.jsx';
 import ContactDock from './components/ContactDock.jsx';
+import PortfolioPreview from './components/PortfolioPreview.jsx';
 import LegacyApp from './legacy/LegacyApp.jsx';
 import { NODES } from './data/universe.js';
 
@@ -26,23 +27,12 @@ function AviVerse() {
   // The landing composition itself explains the site. Help remains available
   // from the dock without covering the first view with an onboarding modal.
   const [showIntro, setShowIntro] = useState(false);
+  const [portfolioSlot, setPortfolioSlot] = useState(null);
 
   useEffect(() => {
     const onHashChange = () => setActiveId(readHash());
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
-  }, []);
-
-  useEffect(() => {
-    // Gamma is a third-party document, so it cannot be copied into our own
-    // cache. Warming the browser cache on arrival makes the Portfolio star
-    // substantially faster when it is opened later.
-    const preload = document.createElement('link');
-    preload.rel = 'prefetch';
-    preload.as = 'document';
-    preload.href = 'https://avikathuria-portfolio-ymlhrik.gamma.site/';
-    document.head.appendChild(preload);
-    return () => preload.remove();
   }, []);
 
   const select = (id) => {
@@ -60,13 +50,18 @@ function AviVerse() {
     setShowIntro(false);
   };
 
+  // While a modal or drawer is open, the graph itself should be inert so it
+  // can never intercept a click meant for something stacked above it.
+  const graphPaused = showIntro || !!activeId;
+
   return (
     <div className="h-screen w-screen overflow-hidden bg-[#0B0E14] text-[#F2EFE6]">
       <Starfield />
       <BackgroundStory />
-      <UniverseGraph onSelect={select} activeId={activeId} />
+      <UniverseGraph onSelect={select} activeId={activeId} paused={graphPaused} />
       <ContactDock onHelp={() => setShowIntro(true)} />
-      <DetailPanel nodeId={activeId} onClose={close} />
+      <PortfolioPreview mountNode={portfolioSlot} />
+      <DetailPanel nodeId={activeId} onClose={close} onPortfolioSlotChange={setPortfolioSlot} />
       {showIntro && <IntroOverlay onDismiss={dismissIntro} />}
     </div>
   );

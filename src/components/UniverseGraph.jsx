@@ -43,7 +43,7 @@ function computeFit() {
   };
 }
 
-export default function UniverseGraph({ onSelect, activeId }) {
+export default function UniverseGraph({ onSelect, activeId, paused }) {
   const stageRef = useRef(null);
   const [view, setView] = useState(computeFit);
   const dragState = useRef({ dragging: false, startX: 0, startY: 0, startPanX: 0, startPanY: 0, moved: false });
@@ -57,6 +57,7 @@ export default function UniverseGraph({ onSelect, activeId }) {
   }, []);
 
   const onPointerDown = (e) => {
+    if (paused) return;
     dragState.current = {
       dragging: true,
       moved: false,
@@ -77,11 +78,16 @@ export default function UniverseGraph({ onSelect, activeId }) {
     setView((v) => ({ ...v, panX: d.startPanX + dx, panY: d.startPanY + dy }));
   };
 
-  const onPointerUp = () => {
+  const onPointerUp = (e) => {
     dragState.current.dragging = false;
+    // Always give up capture on release so a stray drag can never leave the
+    // stage silently swallowing the next click meant for something else
+    // (like the Help "Enter" button or a panel above it).
+    if (e?.pointerId != null) stageRef.current?.releasePointerCapture?.(e.pointerId);
   };
 
   const onWheel = (e) => {
+    if (paused) return;
     const delta = e.deltaY > 0 ? -0.08 : 0.08;
     setView((v) => {
       const newZoom = clamp(v.zoom + delta, MIN_ZOOM, MAX_ZOOM);
@@ -118,7 +124,7 @@ export default function UniverseGraph({ onSelect, activeId }) {
   return (
     <div
       ref={stageRef}
-      className="fixed inset-0 z-10 touch-none cursor-grab active:cursor-grabbing select-none"
+      className={`fixed inset-0 z-10 touch-none select-none ${paused ? 'pointer-events-none' : 'cursor-grab active:cursor-grabbing'}`}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}

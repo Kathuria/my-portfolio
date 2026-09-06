@@ -38,8 +38,8 @@ export const NODES = [
       'Technical Lead running full-stack development for enterprise platforms — performance optimization, mentoring engineering teams, and shipping resilient products at scale. GitHub is the running log of repositories, experiments, and contributions.',
     stats: ['10+ yrs experience', 'Technical Lead'],
     links: [{ label: 'GitHub profile', url: 'https://github.com/Kathuria' }],
+    githubUser: 'Kathuria',
     embedBlocked: true,
-    destinationNote: 'GitHub sets a security header that stops any outside site — including this one — from framing github.com. Open the profile directly instead.',
   },
   {
     id: 'opensource',
@@ -91,6 +91,7 @@ export const NODES = [
       'A run of published Amazon Alexa skills — from an Indian National Anthem skill to an India Tour Guide and a Hindi alphabet teacher — built while exploring voice as an interaction model.',
     stats: ['10 published skills'],
     links: [{ label: 'See all on GitHub', url: 'https://github.com/Kathuria/Kathuria' }],
+    noPreview: true,
   },
 
   // ---------- TRAVEL ----------
@@ -124,7 +125,7 @@ export const NODES = [
     tagline: 'A separate Facebook community for the surprising and remarkable',
     description:
       'Avi’s Facebook page for astonishing facts is its own destination — separate from the travel archive and travel channel.',
-    destinationNote: 'A public Facebook page for surprising, remarkable, and thought-provoking facts — separate from Avi’s travel work. Facebook only allows its own Page Plugin to be embedded, not a plain page, so this opens directly instead.',
+    coverImage: 'https://graph.facebook.com/AstonishingFactsYouReallyNeedToKnow/picture?width=600&height=600',
     links: [{ label: 'Open Astonishing Facts on Facebook', url: 'https://www.facebook.com/AstonishingFactsYouReallyNeedToKnow' }],
     embedBlocked: true,
   },
@@ -166,7 +167,6 @@ export const NODES = [
     description:
       'A quiet, years-long habit of reviewing, mapping, and photographing places — grown into one of the most active Local Guide profiles around.',
     stats: ['Level 8 Local Guide', '10,000+ contributions', '39,000+ points', '52,000,000+ photo views'],
-    destinationNote: 'Avi Kathuria · Local Guide Level 8 · Explorer of new experiences :) Photography has earned 52,000,000+ photo views. Google\u2019s Maps pages refuse to be framed by outside sites, so both open directly in Google Maps.',
     links: [
       { label: 'Reviews', url: 'https://www.google.com/maps/contrib/106987478734810935880/reviews' },
       { label: 'Photos', url: 'https://www.google.com/maps/contrib/106987478734810935880/photos' },
@@ -175,7 +175,7 @@ export const NODES = [
   },
   {
     id: 'journey',
-    cluster: 'travel',
+    cluster: 'build',
     x: 960,
     y: 825,
     r: 30,
@@ -186,11 +186,12 @@ export const NODES = [
     timeline: [
       ['2011–2015', 'B.Tech, Computer Science — Chandigarh Group of Colleges'],
       ['Jan 2015 – Jun 2015', 'Software Trainee — Aricent, Gurgaon'],
-      ['2016–2018', 'Associate QA Engineer — Sapient Global Markets, Noida'],
+      ['Nov 2015 – 2018', 'Associate QA Engineer — Sapient Global Markets, Noida'],
       ['2018–2022', 'Associate → Senior Associate — Publicis Sapient, Noida'],
       ['2022–Present', 'Technical Lead — Publicis Sapient, Dallas, TX'],
     ],
     links: [{ label: 'View full history on LinkedIn', url: 'https://www.linkedin.com/in/avi-kathuria-6b222763/' }],
+    noPreview: true,
   },
 ];
 

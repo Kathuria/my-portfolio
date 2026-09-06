@@ -1,5 +1,7 @@
-import { X, ArrowUpRight, ExternalLink, Compass, Lock } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { X, ArrowUpRight, ExternalLink, Compass, Star, Image as ImageIcon } from 'lucide-react';
 import { NODES, CLUSTER_META, CORE, YOUTUBE_PLAYLISTS, ALEXA_SKILLS } from '../data/universe.js';
+import GitHubStatsCard from './GitHubStatsCard.jsx';
 
 function StampBadge({ text, color }) {
   return (
@@ -12,9 +14,20 @@ function StampBadge({ text, color }) {
   );
 }
 
-export default function DetailPanel({ nodeId, onClose }) {
+export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) {
   const isCore = nodeId === 'avi';
   const node = isCore ? null : NODES.find((n) => n.id === nodeId);
+  const isPortfolio = node?.id === 'portfolio';
+  const portfolioSlotRef = useRef(null);
+
+  useEffect(() => {
+    if (isPortfolio && onPortfolioSlotChange) {
+      onPortfolioSlotChange(portfolioSlotRef.current);
+      return () => onPortfolioSlotChange(null);
+    }
+    return undefined;
+  }, [isPortfolio, onPortfolioSlotChange]);
+
   if (!nodeId || (!isCore && !node)) return null;
 
   const color = isCore ? '#C9A24B' : CLUSTER_META[node.cluster].color;
@@ -32,7 +45,6 @@ export default function DetailPanel({ nodeId, onClose }) {
   const previewLink = links?.[0];
   const embedBlocked = !isCore && node?.embedBlocked;
   const noPreview = !isCore && node?.noPreview;
-  const destinationNote = !isCore && node?.destinationNote;
 
   return (
     <>
@@ -94,6 +106,8 @@ export default function DetailPanel({ nodeId, onClose }) {
                 <img
                   src={profileImage}
                   alt="Avi Kathuria"
+                  loading="eager"
+                  fetchpriority="high"
                   className="max-h-[48vh] w-auto max-w-full rounded-xl border-2 border-[#C9A24B]/50 object-contain shadow-lg"
                 />
               </figure>
@@ -155,7 +169,26 @@ export default function DetailPanel({ nodeId, onClose }) {
             )}
           </div>
 
-          {previewLink && !noPreview && !embedBlocked && (
+          {isPortfolio && (
+            <section className="mt-6 flex min-h-[19rem] flex-1 flex-col overflow-hidden rounded-xl border border-[#241a06]/15 bg-[#e9dfc9] shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
+              <div className="flex items-center justify-between border-b border-[#241a06]/10 bg-[#f8f2e5] px-3 py-2">
+                <span className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.13em] text-[#5c4a22]">
+                  <Compass size={13} style={{ color }} /> Live destination
+                </span>
+                <a
+                  href={previewLink.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-[#241a06] hover:underline"
+                >
+                  Open externally <ExternalLink size={13} />
+                </a>
+              </div>
+              <div ref={portfolioSlotRef} className="min-h-[17rem] flex-1 w-full bg-[#f8f2e5]" />
+            </section>
+          )}
+
+          {previewLink && !isPortfolio && !noPreview && !embedBlocked && (
               <section className="mt-6 flex min-h-[19rem] flex-1 flex-col overflow-hidden rounded-xl border border-[#241a06]/15 bg-[#e9dfc9] shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
                 <div className="flex items-center justify-between border-b border-[#241a06]/10 bg-[#f8f2e5] px-3 py-2">
                   <span className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.13em] text-[#5c4a22]">
@@ -181,15 +214,42 @@ export default function DetailPanel({ nodeId, onClose }) {
               </section>
           )}
 
-          {embedBlocked && (
-              <section className="mt-6 overflow-hidden rounded-xl border border-[#241a06]/15 bg-[#e9dfc9] shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
-                <div className="flex items-center gap-2 border-b border-[#241a06]/10 bg-[#f8f2e5] px-3 py-2 text-[10px] font-medium uppercase tracking-[0.13em] text-[#5c4a22]">
-                  <Lock size={13} style={{ color }} /> Can't be previewed here
-                </div>
-                <p className="px-4 py-4 text-[13px] leading-relaxed text-[#5c4a22]">
-                  {destinationNote || 'This destination blocks itself from being framed by outside sites, so it opens directly instead.'}
-                </p>
-              </section>
+          {node?.id === 'engineering' && node.githubUser && (
+            <GitHubStatsCard username={node.githubUser} color={color} />
+          )}
+
+          {node?.id === 'google-maps' && links && (
+            <section className="mt-6 grid grid-cols-2 gap-3">
+              {links.map((l, i) => (
+                <a
+                  key={l.url}
+                  href={l.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center gap-2 rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] p-5 text-center transition-transform hover:-translate-y-0.5"
+                >
+                  {i === 0 ? <Star size={26} style={{ color }} /> : <ImageIcon size={26} style={{ color }} />}
+                  <span className="font-serif text-lg text-[#241a06]">{l.label}</span>
+                  <span className="text-xs text-[#5c4a22]">
+                    {i === 0 ? 'Read on Google Maps' : 'Browse the gallery'}
+                  </span>
+                </a>
+              ))}
+            </section>
+          )}
+
+          {node?.id === 'astonishing-facts' && node.coverImage && (
+            <section className="mt-6 overflow-hidden rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
+              <img
+                src={node.coverImage}
+                alt=""
+                loading="lazy"
+                className="block h-40 w-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.parentElement.style.display = 'none';
+                }}
+              />
+            </section>
           )}
 
           {playlists && (
