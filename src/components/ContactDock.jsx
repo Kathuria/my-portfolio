@@ -13,38 +13,38 @@ export default function ContactDock({ onHelp }) {
         <span className="hidden text-sm text-[#B9B4A6] sm:inline">AviVerse</span>
       </div>
 
-      <div className="fixed right-6 top-6 z-30 flex items-center gap-2">
+      <div className="fixed right-6 top-6 z-30 flex items-center gap-2.5">
         <a
           href="https://www.linkedin.com/in/avi-kathuria-6b222763/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#C9A24B]/30 bg-[#0B0E14]/70 text-[#EDE6D6] backdrop-blur hover:border-[#C9A24B]"
+          className="badge-star flex h-10 w-10 items-center justify-center rounded-full text-[#241a06] transition-transform hover:scale-110"
         >
-          <Linkedin size={17} />
+          <Linkedin size={16} strokeWidth={1.9} />
         </a>
         <a
           href="https://github.com/Kathuria"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#C9A24B]/30 bg-[#0B0E14]/70 text-[#EDE6D6] backdrop-blur hover:border-[#C9A24B]"
+          className="badge-star flex h-10 w-10 items-center justify-center rounded-full text-[#241a06] transition-transform hover:scale-110"
         >
-          <Github size={17} />
+          <Github size={16} strokeWidth={1.9} />
         </a>
         <a
           href="mailto:avikathuria21@gmail.com"
           aria-label="Email"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#C9A24B]/30 bg-[#0B0E14]/70 text-[#EDE6D6] backdrop-blur hover:border-[#C9A24B]"
+          className="badge-star flex h-10 w-10 items-center justify-center rounded-full text-[#241a06] transition-transform hover:scale-110"
         >
-          <Mail size={17} />
+          <Mail size={16} strokeWidth={1.9} />
         </a>
         <button
           onClick={onHelp}
           aria-label="How to explore"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#C9A24B]/30 bg-[#0B0E14]/70 text-[#EDE6D6] backdrop-blur hover:border-[#C9A24B]"
+          className="badge-star flex h-10 w-10 items-center justify-center rounded-full text-[#241a06] transition-transform hover:scale-110"
         >
-          <HelpCircle size={17} />
+          <HelpCircle size={16} strokeWidth={1.9} />
         </button>
       </div>
     </>

@@ -1,8 +1,29 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  Gamepad2, Github, FolderGit2, Boxes, Briefcase, Mic,
+  Mountain, Facebook, Youtube, BookOpen, MapPin, Route,
+} from 'lucide-react';
 import { NODES, EXTRA_EDGES, CLUSTER_META, BASE_W, BASE_H, CORE_POS } from '../data/universe.js';
 
 const MIN_ZOOM = 0.4;
 const MAX_ZOOM = 1.8;
+
+// One icon per satellite star, kept close to what each destination actually
+// is (YouTube gets the YouTube glyph, Google Maps gets a pin, and so on).
+const NODE_ICONS = {
+  pokedex: Gamepad2,
+  engineering: Github,
+  opensource: FolderGit2,
+  'metals-catalog': Boxes,
+  portfolio: Briefcase,
+  'alexa-skills': Mic,
+  travel: Mountain,
+  'astonishing-facts': Facebook,
+  youtube: Youtube,
+  blog: BookOpen,
+  'google-maps': MapPin,
+  journey: Route,
+};
 
 function clamp(v, min, max) {
   return Math.max(min, Math.min(max, v));
@@ -174,14 +195,14 @@ export default function UniverseGraph({ onSelect, activeId }) {
               : '0 0 40px rgba(201,162,75,0.35)',
           }}
         >
-          <span className="font-serif text-[2.15rem] font-semibold leading-none text-[#241a06]">AviVerse</span>
-          <span className="mt-1 font-serif text-[1.08rem] leading-none text-[#241a06]">Avi Kathuria</span>
+          <span className="font-serif text-[1.08rem] leading-none text-[#241a06]">Avi Kathuria</span>
           <span className="mt-2 text-[10px] uppercase tracking-[0.15em] text-[#3a2c0d]">Explore the map</span>
         </button>
 
         {NODES.map((n) => {
           const color = CLUSTER_META[n.cluster].color;
           const isActive = activeId === n.id;
+          const Icon = NODE_ICONS[n.id];
           return (
             <button
               key={n.id}
@@ -202,6 +223,7 @@ export default function UniverseGraph({ onSelect, activeId }) {
                 boxShadow: isActive ? `0 0 0 4px ${color}55, 0 0 30px ${color}88` : `0 0 16px ${color}44`,
               }}
             >
+              {Icon && <Icon size={n.r} strokeWidth={1.75} className="text-[#0B0E14]/80" />}
               <span
                 className="absolute whitespace-nowrap font-sans text-[13px] font-medium text-[#F2EFE6]"
                 style={{ top: n.r * 2 + 8 }}

@@ -1,5 +1,5 @@
-import { X, ArrowUpRight, ExternalLink, Compass } from 'lucide-react';
-import { NODES, CLUSTER_META, CORE, YOUTUBE_PLAYLISTS } from '../data/universe.js';
+import { X, ArrowUpRight, ExternalLink, Compass, Lock } from 'lucide-react';
+import { NODES, CLUSTER_META, CORE, YOUTUBE_PLAYLISTS, ALEXA_SKILLS } from '../data/universe.js';
 
 function StampBadge({ text, color }) {
   return (
@@ -28,7 +28,11 @@ export default function DetailPanel({ nodeId, onClose }) {
   const timeline = isCore ? null : node.timeline;
   const parkGroups = isCore ? null : node.parkGroups;
   const playlists = node?.id === 'youtube' ? YOUTUBE_PLAYLISTS : null;
+  const alexaSkills = node?.id === 'alexa-skills' ? ALEXA_SKILLS : null;
   const previewLink = links?.[0];
+  const embedBlocked = !isCore && node?.embedBlocked;
+  const noPreview = !isCore && node?.noPreview;
+  const destinationNote = !isCore && node?.destinationNote;
 
   return (
     <>
@@ -151,7 +155,7 @@ export default function DetailPanel({ nodeId, onClose }) {
             )}
           </div>
 
-          {previewLink && (
+          {previewLink && !noPreview && !embedBlocked && (
               <section className="mt-6 flex min-h-[19rem] flex-1 flex-col overflow-hidden rounded-xl border border-[#241a06]/15 bg-[#e9dfc9] shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
                 <div className="flex items-center justify-between border-b border-[#241a06]/10 bg-[#f8f2e5] px-3 py-2">
                   <span className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.13em] text-[#5c4a22]">
@@ -177,6 +181,17 @@ export default function DetailPanel({ nodeId, onClose }) {
               </section>
           )}
 
+          {embedBlocked && (
+              <section className="mt-6 overflow-hidden rounded-xl border border-[#241a06]/15 bg-[#e9dfc9] shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
+                <div className="flex items-center gap-2 border-b border-[#241a06]/10 bg-[#f8f2e5] px-3 py-2 text-[10px] font-medium uppercase tracking-[0.13em] text-[#5c4a22]">
+                  <Lock size={13} style={{ color }} /> Can't be previewed here
+                </div>
+                <p className="px-4 py-4 text-[13px] leading-relaxed text-[#5c4a22]">
+                  {destinationNote || 'This destination blocks itself from being framed by outside sites, so it opens directly instead.'}
+                </p>
+              </section>
+          )}
+
           {playlists && (
             <section className="mt-6">
               <div className="flex items-baseline justify-between gap-4">
@@ -198,6 +213,31 @@ export default function DetailPanel({ nodeId, onClose }) {
                       <div className="flex aspect-video items-center justify-center bg-[#d7c8aa] text-2xl">▶</div>
                     )}
                     <span className="block px-3 py-2 text-xs font-medium leading-snug text-[#241a06]">{playlistTitle}</span>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {alexaSkills && (
+            <section className="mt-6">
+              <h3 className="font-serif text-2xl text-[#241a06]">Published skills</h3>
+              <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+                {alexaSkills.map(([skillTitle, url, logo]) => (
+                  <a
+                    key={url}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col items-center gap-2 rounded-lg border border-[#241a06]/15 bg-[#f8f2e5] p-3 text-center"
+                  >
+                    <img
+                      src={logo}
+                      alt=""
+                      className="h-16 w-16 object-contain transition-transform group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span className="text-xs font-medium leading-snug text-[#241a06]">{skillTitle}</span>
                   </a>
                 ))}
               </div>
