@@ -19,6 +19,7 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
   const node = isCore ? null : NODES.find((n) => n.id === nodeId);
   const isPortfolio = node?.id === 'portfolio';
   const portfolioSlotRef = useRef(null);
+  const closeButtonRef = useRef(null);
 
   useEffect(() => {
     if (isPortfolio && onPortfolioSlotChange) {
@@ -27,6 +28,16 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
     }
     return undefined;
   }, [isPortfolio, onPortfolioSlotChange]);
+
+  useEffect(() => {
+    if (!nodeId) return undefined;
+    closeButtonRef.current?.focus();
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [nodeId, onClose]);
 
   if (!nodeId || (!isCore && !node)) return null;
 
@@ -54,6 +65,9 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
         aria-hidden="true"
       />
       <aside
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
         className="fixed right-0 top-0 z-50 flex h-full w-full max-w-3xl flex-col overflow-hidden border-l"
         style={{
           background: '#F3ECD9',
@@ -71,11 +85,13 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
             </span>
           )}
           <button
+            ref={closeButtonRef}
+            type="button"
             onClick={onClose}
             aria-label="Close"
             className="ml-auto flex h-9 w-9 items-center justify-center rounded-full border border-[#241a06]/15 text-[#241a06] hover:bg-[#241a06]/5"
           >
-            <X size={18} />
+            <X size={18} aria-hidden="true" />
           </button>
         </div>
 
@@ -147,7 +163,7 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
               </ol>
             )}
 
-            {links && links.length > 0 && (
+            {links && links.length > 0 && node?.id !== 'google-maps' && (
               <div className="mt-5 flex flex-wrap gap-3">
                 {links.map((l) => (
                   <a
@@ -218,37 +234,44 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
             <GitHubStatsCard username={node.githubUser} color={color} />
           )}
 
-          {node?.id === 'google-maps' && links && (
+          {node?.id === 'google-maps' && links && node.metricBlocks && (
             <section className="mt-6 grid grid-cols-2 gap-3">
-              {links.map((l, i) => (
-                <a
-                  key={l.url}
-                  href={l.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col items-center gap-2 rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] p-5 text-center transition-transform hover:-translate-y-0.5"
-                >
-                  {i === 0 ? <Star size={26} style={{ color }} /> : <ImageIcon size={26} style={{ color }} />}
-                  <span className="font-serif text-lg text-[#241a06]">{l.label}</span>
-                  <span className="text-xs text-[#5c4a22]">
-                    {i === 0 ? 'Read on Google Maps' : 'Browse the gallery'}
-                  </span>
-                </a>
-              ))}
+              {links.map((l, i) => {
+                const m = node.metricBlocks[i];
+                return (
+                  <a
+                    key={l.url}
+                    href={l.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col items-center gap-1.5 rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] p-5 text-center transition-transform hover:-translate-y-0.5"
+                  >
+                    <span className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-[0.13em] text-[#5c4a22]">
+                      {i === 0 ? <Star size={13} style={{ color }} /> : <ImageIcon size={13} style={{ color }} />}
+                      {l.label}
+                    </span>
+                    <span className="font-serif text-2xl leading-none text-[#241a06] sm:text-3xl">{m?.value}</span>
+                    <span className="text-xs font-medium text-[#3a2f18]">{m?.label}</span>
+                    {m?.detail && <span className="mt-1 text-[11px] text-[#5c4a22]">{m.detail}</span>}
+                  </a>
+                );
+              })}
             </section>
           )}
 
           {node?.id === 'astonishing-facts' && node.coverImage && (
-            <section className="mt-6 overflow-hidden rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
+            <section className="mt-6 flex items-center gap-4 rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] p-4 shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
               <img
                 src={node.coverImage}
                 alt=""
                 loading="lazy"
-                className="block h-40 w-full object-cover"
+                className="h-20 w-20 shrink-0 rounded-full border-2 object-cover"
+                style={{ borderColor: color }}
                 onError={(e) => {
-                  e.currentTarget.parentElement.style.display = 'none';
+                  e.currentTarget.style.display = 'none';
                 }}
               />
+              <p className="text-sm leading-relaxed text-[#3a2f18]">{description}</p>
             </section>
           )}
 

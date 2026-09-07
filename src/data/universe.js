@@ -32,10 +32,10 @@ export const NODES = [
     x: 800,
     y: 175,
     r: 30,
-    title: 'Engineering + GitHub',
-    tagline: '10+ years building web experiences in the open',
+    title: 'Engineering',
+    tagline: '10+ years building web experiences',
     description:
-      'Technical Lead running full-stack development for enterprise platforms — performance optimization, mentoring engineering teams, and shipping resilient products at scale. GitHub is the running log of repositories, experiments, and contributions.',
+      'Technical Lead running full-stack development for enterprise platforms — performance optimization, mentoring engineering teams, and shipping resilient products at scale. The numbers below are pulled live from GitHub.',
     stats: ['10+ yrs experience', 'Technical Lead'],
     links: [{ label: 'GitHub profile', url: 'https://github.com/Kathuria' }],
     githubUser: 'Kathuria',
@@ -125,7 +125,7 @@ export const NODES = [
     tagline: 'A separate Facebook community for the surprising and remarkable',
     description:
       'Avi’s Facebook page for astonishing facts is its own destination — separate from the travel archive and travel channel.',
-    coverImage: 'https://graph.facebook.com/AstonishingFactsYouReallyNeedToKnow/picture?width=600&height=600',
+    coverImage: 'https://graph.facebook.com/AstonishingFactsYouReallyNeedToKnow/picture?width=200&height=200',
     links: [{ label: 'Open Astonishing Facts on Facebook', url: 'https://www.facebook.com/AstonishingFactsYouReallyNeedToKnow' }],
     embedBlocked: true,
   },
@@ -166,7 +166,10 @@ export const NODES = [
     tagline: 'Level 8 Local Guide',
     description:
       'A quiet, years-long habit of reviewing, mapping, and photographing places — grown into one of the most active Local Guide profiles around.',
-    stats: ['Level 8 Local Guide', '10,000+ contributions', '39,000+ points', '52,000,000+ photo views'],
+    metricBlocks: [
+      { value: '10,000+', label: 'Contributions', detail: 'Level 8 Local Guide · 39,000+ points' },
+      { value: '52M+', label: 'Photo views', detail: 'Across thousands of places' },
+    ],
     links: [
       { label: 'Reviews', url: 'https://www.google.com/maps/contrib/106987478734810935880/reviews' },
       { label: 'Photos', url: 'https://www.google.com/maps/contrib/106987478734810935880/photos' },
@@ -269,3 +272,11 @@ export const CLUSTER_META = {
 export const BASE_W = 1600;
 export const BASE_H = 1000;
 export const CORE_POS = { x: 800, y: 500 };
+
+// Sourced straight from the legacy site's own "Core Expertise" list plus the
+// Metals Catalog stack — nothing invented — used by the ambient skill
+// spotlight that appears in the corner of the screen.
+export const SKILLS = [
+  'React', 'TypeScript', 'Node.js', 'Next.js', 'AWS',
+  'GraphQL', 'Microservices', 'CI/CD', 'Tailwind CSS', 'Supabase',
+];

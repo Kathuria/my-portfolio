@@ -46,6 +46,7 @@ function computeFit() {
 export default function UniverseGraph({ onSelect, activeId, paused }) {
   const stageRef = useRef(null);
   const [view, setView] = useState(computeFit);
+  const [spotlightId, setSpotlightId] = useState(null);
   const dragState = useRef({ dragging: false, startX: 0, startY: 0, startPanX: 0, startPanY: 0, moved: false });
 
   const fitToViewport = useCallback(() => setView(computeFit()), []);
@@ -55,6 +56,35 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
+
+  // Every so often, quietly highlight a random star for a few seconds, then
+  // let it fade back to normal — a small "did you notice this?" nudge
+  // rather than anything that demands attention.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    let hideTimeout;
+    let cycleTimeout;
+
+    function cycle() {
+      const wait = 7000 + Math.random() * 6000;
+      cycleTimeout = setTimeout(() => {
+        if (!paused) {
+          const candidates = NODES.filter((n) => n.id !== activeId);
+          const pick = candidates[Math.floor(Math.random() * candidates.length)];
+          if (pick) {
+            setSpotlightId(pick.id);
+            hideTimeout = setTimeout(() => setSpotlightId(null), 2800);
+          }
+        }
+        cycle();
+      }, wait);
+    }
+    cycle();
+    return () => {
+      clearTimeout(cycleTimeout);
+      clearTimeout(hideTimeout);
+    };
+  }, [paused, activeId]);
 
   const onPointerDown = (e) => {
     if (paused) return;
@@ -184,35 +214,64 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
         {/* core node */}
         <button
           type="button"
+          aria-label="Avi Kathuria — open profile"
           onPointerDown={(e) => e.stopPropagation()}
           onClick={(e) => {
             e.stopPropagation();
             onSelect('avi');
           }}
-          className="absolute flex flex-col items-center justify-center rounded-full text-center"
+          className="absolute flex flex-col items-center justify-center overflow-hidden rounded-full text-center"
           style={{
             left: CORE_POS.x - 106,
             top: CORE_POS.y - 106,
             width: 212,
             height: 212,
-            background: 'radial-gradient(circle at 35% 30%, #F4E7C1, #C9A24B 65%, #8a6c2c 100%)',
+            background: '#0f2233',
             boxShadow: activeId === 'avi'
               ? '0 0 0 4px rgba(201,162,75,0.5), 0 0 60px rgba(201,162,75,0.55)'
               : '0 0 40px rgba(201,162,75,0.35)',
           }}
         >
-          <span className="font-serif text-[1.08rem] leading-none text-[#241a06]">Avi Kathuria</span>
-          <span className="mt-2 text-[10px] uppercase tracking-[0.15em] text-[#3a2c0d]">Explore the map</span>
+          <svg viewBox="0 0 212 212" className="absolute inset-0 h-full w-full" style={{ opacity: 0.6 }} aria-hidden="true">
+            <defs>
+              <radialGradient id="globeOcean" cx="35%" cy="30%" r="75%">
+                <stop offset="0%" stopColor="#a8dcec" />
+                <stop offset="55%" stopColor="#2f7ea6" />
+                <stop offset="100%" stopColor="#123a52" />
+              </radialGradient>
+            </defs>
+            <circle cx="106" cy="106" r="106" fill="url(#globeOcean)" />
+            <path d="M35 65 Q55 42 90 55 Q112 48 104 78 Q128 84 112 106 Q98 128 66 116 Q38 124 44 96 Q18 88 35 65Z" fill="#B9A15A" />
+            <path d="M135 48 Q158 40 168 68 Q182 82 160 98 Q152 118 132 104 Q124 82 135 48Z" fill="#8fae5c" />
+            <path d="M70 150 Q95 140 116 156 Q124 172 102 178 Q80 182 72 165Z" fill="#B9A15A" />
+            <path d="M150 130 Q172 126 176 148 Q166 162 148 152Z" fill="#8fae5c" />
+            <ellipse cx="106" cy="106" rx="106" ry="32" fill="none" stroke="#F4E7C1" strokeOpacity="0.18" strokeWidth="1.2" />
+            <ellipse cx="106" cy="106" rx="48" ry="106" fill="none" stroke="#F4E7C1" strokeOpacity="0.14" strokeWidth="1.2" />
+          </svg>
+          <span
+            className="relative font-serif text-[1.08rem] leading-none text-[#F8F1DE]"
+            style={{ textShadow: '0 1px 4px rgba(0,0,0,0.7)' }}
+          >
+            Avi Kathuria
+          </span>
+          <span
+            className="relative mt-2 text-[10px] uppercase tracking-[0.15em] text-[#F8F1DE]/90"
+            style={{ textShadow: '0 1px 3px rgba(0,0,0,0.7)' }}
+          >
+            Explore the map
+          </span>
         </button>
 
         {NODES.map((n) => {
           const color = CLUSTER_META[n.cluster].color;
           const isActive = activeId === n.id;
+          const isSpotlighted = spotlightId === n.id;
           const Icon = NODE_ICONS[n.id];
           return (
             <button
               key={n.id}
               type="button"
+              aria-label={`${n.title} — open`}
               onPointerDown={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
@@ -229,7 +288,14 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
                 boxShadow: isActive ? `0 0 0 4px ${color}55, 0 0 30px ${color}88` : `0 0 16px ${color}44`,
               }}
             >
-              {Icon && <Icon size={n.r} strokeWidth={1.75} className="text-[#0B0E14]/80" />}
+              {isSpotlighted && (
+                <span
+                  className="node-aura"
+                  style={{ '--aura-color': color }}
+                  aria-hidden="true"
+                />
+              )}
+              {Icon && <Icon size={n.r} strokeWidth={1.75} className="text-[#0B0E14]/80" aria-hidden="true" />}
               <span
                 className="absolute whitespace-nowrap font-sans text-[13px] font-medium text-[#F2EFE6]"
                 style={{ top: n.r * 2 + 8 }}

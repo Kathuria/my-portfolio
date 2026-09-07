@@ -6,6 +6,7 @@ import DetailPanel from './components/DetailPanel.jsx';
 import IntroOverlay from './components/IntroOverlay.jsx';
 import ContactDock from './components/ContactDock.jsx';
 import PortfolioPreview from './components/PortfolioPreview.jsx';
+import SkillSpotlight from './components/SkillSpotlight.jsx';
 import LegacyApp from './legacy/LegacyApp.jsx';
 import { NODES } from './data/universe.js';
 
@@ -61,6 +62,7 @@ function AviVerse() {
       <UniverseGraph onSelect={select} activeId={activeId} paused={graphPaused} />
       <ContactDock onHelp={() => setShowIntro(true)} />
       <PortfolioPreview mountNode={portfolioSlot} />
+      <SkillSpotlight hidden={graphPaused} />
       <DetailPanel nodeId={activeId} onClose={close} onPortfolioSlotChange={setPortfolioSlot} />
       {showIntro && <IntroOverlay onDismiss={dismissIntro} />}
     </div>

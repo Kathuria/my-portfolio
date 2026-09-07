@@ -5,6 +5,7 @@ export default function ContactDock({ onHelp }) {
     <>
       <div className="fixed left-6 top-6 z-30 flex items-center gap-3">
         <div
+          aria-hidden="true"
           className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold"
           style={{ background: '#C9A24B', color: '#241a06', fontFamily: "'Fraunces', serif" }}
         >
@@ -21,7 +22,7 @@ export default function ContactDock({ onHelp }) {
           aria-label="LinkedIn"
           className="badge-star flex h-10 w-10 items-center justify-center rounded-full text-[#241a06] transition-transform hover:scale-110"
         >
-          <Linkedin size={16} strokeWidth={1.9} />
+          <Linkedin size={16} strokeWidth={1.9} aria-hidden="true" />
         </a>
         <a
           href="https://github.com/Kathuria"
@@ -30,21 +31,22 @@ export default function ContactDock({ onHelp }) {
           aria-label="GitHub"
           className="badge-star flex h-10 w-10 items-center justify-center rounded-full text-[#241a06] transition-transform hover:scale-110"
         >
-          <Github size={16} strokeWidth={1.9} />
+          <Github size={16} strokeWidth={1.9} aria-hidden="true" />
         </a>
         <a
           href="mailto:avikathuria21@gmail.com"
           aria-label="Email"
           className="badge-star flex h-10 w-10 items-center justify-center rounded-full text-[#241a06] transition-transform hover:scale-110"
         >
-          <Mail size={16} strokeWidth={1.9} />
+          <Mail size={16} strokeWidth={1.9} aria-hidden="true" />
         </a>
         <button
+          type="button"
           onClick={onHelp}
           aria-label="How to explore"
           className="badge-star flex h-10 w-10 items-center justify-center rounded-full text-[#241a06] transition-transform hover:scale-110"
         >
-          <HelpCircle size={16} strokeWidth={1.9} />
+          <HelpCircle size={16} strokeWidth={1.9} aria-hidden="true" />
         </button>
       </div>
     </>

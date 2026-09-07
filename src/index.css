@@ -110,6 +110,33 @@ body {
   box-shadow: 0 0 22px rgba(201, 162, 75, 0.7);
 }
 
+:focus-visible {
+  outline: 2px solid #C9A24B;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Brief pulsing ring shown when a node is randomly spotlighted */
+.node-aura {
+  position: absolute;
+  inset: -14px;
+  border-radius: 9999px;
+  border: 2px solid var(--aura-color, #C9A24B);
+  opacity: 0;
+  animation: nodeAuraPulse 2.8s ease-out;
+  pointer-events: none;
+}
+
+@keyframes nodeAuraPulse {
+  0% { transform: scale(0.85); opacity: 0; }
+  15% { opacity: 0.9; }
+  100% { transform: scale(1.65); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node-aura { display: none; }
+}
+
 /* Slim, quiet scrollbar for the detail panel */
 aside::-webkit-scrollbar {
   width: 6px;
