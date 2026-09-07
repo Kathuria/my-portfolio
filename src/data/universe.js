@@ -170,6 +170,7 @@ export const NODES = [
       { value: '10,000+', label: 'Contributions', detail: 'Level 8 Local Guide · 39,000+ points' },
       { value: '52M+', label: 'Photo views', detail: 'Across thousands of places' },
     ],
+    profileLink: { label: 'Full Local Guide profile', url: 'https://www.google.com/maps/contrib/106987478734810935880/' },
     links: [
       { label: 'Reviews', url: 'https://www.google.com/maps/contrib/106987478734810935880/reviews' },
       { label: 'Photos', url: 'https://www.google.com/maps/contrib/106987478734810935880/photos' },
@@ -195,6 +196,78 @@ export const NODES = [
     ],
     links: [{ label: 'View full history on LinkedIn', url: 'https://www.linkedin.com/in/avi-kathuria-6b222763/' }],
     noPreview: true,
+  },
+  {
+    id: 'competitions',
+    cluster: 'build',
+    x: 520,
+    y: 480,
+    r: 24,
+    title: 'Competitions',
+    tagline: 'Quiz competition results',
+    description: 'Placements from live quiz competitions hosted on Unstop.',
+    links: [
+      { label: 'Techwiz Quiz 2022 — Rank 10', url: 'https://unstop.com/competitions/techwiz-quiz22-273936/leaderboard' },
+      { label: 'Techwiz Quiz 2021 — Rank 26', url: 'https://unstop.com/competitions/techwiz-quiz21-139951/leaderboard' },
+    ],
+    noPreview: true,
+  },
+  {
+    id: 'advent-of-code',
+    cluster: 'build',
+    x: 1220,
+    y: 300,
+    r: 26,
+    title: 'Advent of Code',
+    tagline: '6 years of Advent of Code',
+    description:
+      'A private leaderboard run every December since 2020 — daily programming puzzles solved for fun. The leaderboards themselves need an Advent of Code login to view, since they\u2019re private by design.',
+    links: [
+      { label: 'Advent of Code', url: 'https://adventofcode.com/' },
+      { label: '2025 leaderboard', url: 'https://adventofcode.com/2025/leaderboard/private/view/522978' },
+      { label: '2024 leaderboard', url: 'https://adventofcode.com/2024/leaderboard/private/view/522978' },
+      { label: '2023 leaderboard', url: 'https://adventofcode.com/2023/leaderboard/private/view/522978' },
+      { label: '2022 leaderboard', url: 'https://adventofcode.com/2022/leaderboard/private/view/522978' },
+      { label: '2021 leaderboard', url: 'https://adventofcode.com/2021/leaderboard/private/view/522978' },
+      { label: '2020 leaderboard', url: 'https://adventofcode.com/2020/leaderboard/private/view/522978' },
+    ],
+    noPreview: true,
+  },
+  {
+    id: 'quora',
+    cluster: 'share',
+    x: 1460,
+    y: 420,
+    r: 22,
+    title: 'Quora',
+    tagline: 'Answers and perspectives shared on Quora',
+    description: "Avi's Quora profile — a smaller, more conversational counterpart to the blog and Medium.",
+    links: [{ label: 'View Quora profile', url: 'https://www.quora.com/profile/Avi-Kathuria' }],
+    embedBlocked: true,
+  },
+  {
+    id: 'medium',
+    cluster: 'share',
+    x: 1480,
+    y: 610,
+    r: 22,
+    title: 'Medium',
+    tagline: 'Long-form writing on Medium',
+    description: 'A home for longer-form technical and personal writing, separate from the travel blog.',
+    links: [{ label: 'Read on Medium', url: 'https://medium.com/@avikathuria21' }],
+    embedBlocked: true,
+  },
+  {
+    id: 'twitter',
+    cluster: 'share',
+    x: 1360,
+    y: 690,
+    r: 22,
+    title: 'X',
+    tagline: '@kathuria_avi',
+    description: 'Shorter-form thoughts and updates, posted more casually than the blog or Medium.',
+    links: [{ label: 'Follow on X', url: 'https://x.com/kathuria_avi' }],
+    embedBlocked: true,
   },
 ];
 
@@ -256,17 +329,27 @@ export const EXTRA_EDGES = [
   ['engineering', 'portfolio'],
   ['engineering', 'pokedex'],
   ['engineering', 'alexa-skills'],
+  ['engineering', 'competitions'],
+  ['engineering', 'advent-of-code'],
   ['travel', 'youtube'],
   ['travel', 'blog'],
   ['journey', 'travel'],
   ['journey', 'engineering'],
+  ['astonishing-facts', 'quora'],
+  ['astonishing-facts', 'medium'],
+  ['astonishing-facts', 'twitter'],
 ];
 
 export const CLUSTER_META = {
-  build: { label: 'Build', color: '#5EC8C0' },
-  travel: { label: 'Travel', color: '#E08D3C' },
-  places: { label: 'Places', color: '#8FB37E' },
-  share: { label: 'Share', color: '#B18CD2' },
+  // `color` is used for glows/lines/fills on the dark background (already
+  // high contrast there). `textColor` is a darker variant used only where
+  // the color renders as text/labels on the light parchment panel —
+  // verified against WCAG AAA (7:1) with an actual contrast calculation;
+  // the original vivid colors measured as low as 1.7:1 as text there.
+  build: { label: 'Build', color: '#5EC8C0', textColor: '#275451' },
+  travel: { label: 'Travel', color: '#E08D3C', textColor: '#6c441d' },
+  places: { label: 'Places', color: '#8FB37E', textColor: '#42523a' },
+  share: { label: 'Share', color: '#B18CD2', textColor: '#584669' },
 };
 
 export const BASE_W = 1600;

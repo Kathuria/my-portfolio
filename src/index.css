@@ -25,7 +25,7 @@ body {
   position: absolute;
   z-index: 1;
   left: clamp(1.5rem, 6.5vw, 7.5rem);
-  bottom: clamp(4.25rem, calc(10vh + 1.25rem), 9.25rem);
+  bottom: clamp(2rem, calc(4vh + 0.75rem), 5.5rem);
   max-width: min(50rem, calc(100vw - 3rem));
   color: #f7f1e6;
 }
@@ -95,7 +95,7 @@ body {
 
 @media (max-width: 640px) {
   .story-path-text { font-size: 11px; letter-spacing: 2px; }
-  .universe-plate { bottom: 6.75rem; }
+  .universe-plate { bottom: 4.25rem; }
   .universe-plate h1 span:first-child { font-size: clamp(4.6rem, 26vw, 7.5rem); }
   .universe-plate h1 span:last-child { font-size: clamp(3.8rem, 22vw, 6.4rem); }
   .universe-byline { max-width: 16rem; }

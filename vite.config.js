@@ -8,4 +8,9 @@ export default defineConfig({
     tailwindcss()
   ],
   base: '/', // Change this if deploying to a subdirectory
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/test/setup.js',
+  },
 })

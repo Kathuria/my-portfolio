@@ -1,4 +1,40 @@
+# General crawlers (search engines, link-preview bots) are welcome.
 User-agent: *
 Allow: /
+
+# AI crawlers/agents that identify themselves are asked not to use this
+# site's content for model training or automated scraping. This is a
+# request, not an enforcement mechanism — robots.txt only works for bots
+# that choose to honor it, and there's no reliable way to force that on a
+# static, publicly-hosted site (see CHANGES.md for why).
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
 
 Sitemap: https://avikathuria.com/sitemap.xml

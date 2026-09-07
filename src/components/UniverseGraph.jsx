@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Gamepad2, Github, FolderGit2, Boxes, Briefcase, Mic,
   Mountain, Facebook, Youtube, BookOpen, MapPin, Route,
+  Trophy, Snowflake, MessageCircleQuestion, PenLine, Twitter,
 } from 'lucide-react';
 import { NODES, EXTRA_EDGES, CLUSTER_META, BASE_W, BASE_H, CORE_POS } from '../data/universe.js';
 
@@ -23,6 +24,11 @@ const NODE_ICONS = {
   blog: BookOpen,
   'google-maps': MapPin,
   journey: Route,
+  competitions: Trophy,
+  'advent-of-code': Snowflake,
+  quora: MessageCircleQuestion,
+  medium: PenLine,
+  twitter: Twitter,
 };
 
 function clamp(v, min, max) {
@@ -48,6 +54,8 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
   const [view, setView] = useState(computeFit);
   const [spotlightId, setSpotlightId] = useState(null);
   const dragState = useRef({ dragging: false, startX: 0, startY: 0, startPanX: 0, startPanY: 0, moved: false });
+  const pendingPanRef = useRef(null);
+  const panRafId = useRef(null);
 
   const fitToViewport = useCallback(() => setView(computeFit()), []);
 
@@ -105,11 +113,29 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
     const dx = e.clientX - d.startX;
     const dy = e.clientY - d.startY;
     if (Math.abs(dx) > 3 || Math.abs(dy) > 3) d.moved = true;
-    setView((v) => ({ ...v, panX: d.startPanX + dx, panY: d.startPanY + dy }));
+    pendingPanRef.current = { panX: d.startPanX + dx, panY: d.startPanY + dy };
+    if (panRafId.current == null) {
+      panRafId.current = requestAnimationFrame(() => {
+        panRafId.current = null;
+        if (pendingPanRef.current) {
+          setView((v) => ({ ...v, ...pendingPanRef.current }));
+        }
+      });
+    }
   };
 
   const onPointerUp = (e) => {
     dragState.current.dragging = false;
+    if (panRafId.current != null) {
+      cancelAnimationFrame(panRafId.current);
+      panRafId.current = null;
+    }
+    // Apply whatever the last pointer position was immediately, so letting
+    // go never drops the final few pixels of a gesture.
+    if (pendingPanRef.current) {
+      setView((v) => ({ ...v, ...pendingPanRef.current }));
+      pendingPanRef.current = null;
+    }
     // Always give up capture on release so a stray drag can never leave the
     // stage silently swallowing the next click meant for something else
     // (like the Help "Enter" button or a panel above it).
@@ -165,6 +191,7 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
         style={{
           transform: `translate(${view.panX}px, ${view.panY}px) scale(${view.zoom})`,
           transformOrigin: '0 0',
+          willChange: 'transform',
           width: BASE_W,
           height: BASE_H,
           position: 'absolute',

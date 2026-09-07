@@ -39,7 +39,7 @@ export default function SkillSpotlight({ hidden }) {
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none fixed bottom-6 left-6 z-20 flex items-center gap-2 rounded-full border border-[#C9A24B]/30 bg-[#0B0E14]/75 px-4 py-2 text-sm text-[#EDE6D6] backdrop-blur transition-all duration-500 ${
+      className={`pointer-events-none fixed bottom-48 right-6 z-20 flex items-center gap-2 rounded-full border border-[#C9A24B]/30 bg-[#0B0E14]/75 px-4 py-2 text-sm text-[#EDE6D6] backdrop-blur transition-all duration-500 ${
         visible && !hidden ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
       }`}
     >

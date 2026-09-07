@@ -41,7 +41,7 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
 
   if (!nodeId || (!isCore && !node)) return null;
 
-  const color = isCore ? '#C9A24B' : CLUSTER_META[node.cluster].color;
+  const color = isCore ? '#5c4b22' : CLUSTER_META[node.cluster].textColor;
   const title = isCore ? CORE.title : node.title;
   const tagline = isCore ? null : node.tagline;
   const description = isCore ? CORE.description : node.description;
@@ -123,7 +123,7 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
                   src={profileImage}
                   alt="Avi Kathuria"
                   loading="eager"
-                  fetchpriority="high"
+                  fetchPriority="high"
                   className="max-h-[48vh] w-auto max-w-full rounded-xl border-2 border-[#C9A24B]/50 object-contain shadow-lg"
                 />
               </figure>
@@ -235,27 +235,45 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
           )}
 
           {node?.id === 'google-maps' && links && node.metricBlocks && (
-            <section className="mt-6 grid grid-cols-2 gap-3">
-              {links.map((l, i) => {
-                const m = node.metricBlocks[i];
-                return (
-                  <a
-                    key={l.url}
-                    href={l.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col items-center gap-1.5 rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] p-5 text-center transition-transform hover:-translate-y-0.5"
-                  >
-                    <span className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-[0.13em] text-[#5c4a22]">
-                      {i === 0 ? <Star size={13} style={{ color }} /> : <ImageIcon size={13} style={{ color }} />}
-                      {l.label}
-                    </span>
-                    <span className="font-serif text-2xl leading-none text-[#241a06] sm:text-3xl">{m?.value}</span>
-                    <span className="text-xs font-medium text-[#3a2f18]">{m?.label}</span>
-                    {m?.detail && <span className="mt-1 text-[11px] text-[#5c4a22]">{m.detail}</span>}
-                  </a>
-                );
-              })}
+            <section className="mt-6">
+              <div className="grid grid-cols-2 gap-3">
+                {links.map((l, i) => {
+                  const m = node.metricBlocks[i];
+                  return (
+                    <a
+                      key={l.url}
+                      href={l.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex flex-col items-center gap-1.5 rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] p-5 text-center transition-transform hover:-translate-y-0.5"
+                    >
+                      <span className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-[0.13em] text-[#5c4a22]">
+                        {i === 0 ? <Star size={13} style={{ color }} aria-hidden="true" /> : <ImageIcon size={13} style={{ color }} aria-hidden="true" />}
+                        {l.label}
+                      </span>
+                      <span className="font-serif text-2xl leading-none text-[#241a06] sm:text-3xl">{m?.value}</span>
+                      <span className="text-xs font-medium text-[#3a2f18]">{m?.label}</span>
+                      {m?.detail && <span className="mt-1 text-[11px] text-[#5c4a22]">{m.detail}</span>}
+                    </a>
+                  );
+                })}
+              </div>
+              {node.profileLink && (
+                <a
+                  href={node.profileLink.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-3 flex items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors"
+                  style={{ borderColor: `${color}66`, color: '#241a06' }}
+                >
+                  {node.profileLink.label}
+                  <ArrowUpRight
+                    size={16}
+                    className="text-[#241a06]/50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    aria-hidden="true"
+                  />
+                </a>
+              )}
             </section>
           )}
 
