@@ -277,19 +277,47 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
             </section>
           )}
 
-          {node?.id === 'astonishing-facts' && node.coverImage && (
-            <section className="mt-6 flex items-center gap-4 rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] p-4 shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
-              <img
-                src={node.coverImage}
-                alt=""
-                loading="lazy"
-                className="h-20 w-20 shrink-0 rounded-full border-2 object-cover"
-                style={{ borderColor: color }}
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                }}
-              />
-              <p className="text-sm leading-relaxed text-[#3a2f18]">{description}</p>
+          {node?.profiles && (
+            <section className="mt-6 flex flex-col gap-3">
+              {node.profiles.map((p) => (
+                <a
+                  key={p.id}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-4 rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] p-4 shadow-[0_10px_25px_rgba(36,26,6,0.12)] transition-transform hover:-translate-y-0.5"
+                >
+                  {p.coverImage ? (
+                    <img
+                      src={p.coverImage}
+                      alt=""
+                      loading="lazy"
+                      className="h-14 w-14 shrink-0 rounded-full border-2 object-cover"
+                      style={{ borderColor: color }}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  ) : (
+                    <span
+                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 font-serif text-lg"
+                      style={{ borderColor: color, color }}
+                      aria-hidden="true"
+                    >
+                      {p.label.slice(0, 1)}
+                    </span>
+                  )}
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-semibold text-[#241a06]">{p.label}</span>
+                    <span className="block truncate text-xs text-[#5c4a22]">{p.tagline}</span>
+                  </span>
+                  <ArrowUpRight
+                    size={16}
+                    className="shrink-0 text-[#241a06]/50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    aria-hidden="true"
+                  />
+                </a>
+              ))}
             </section>
           )}
 

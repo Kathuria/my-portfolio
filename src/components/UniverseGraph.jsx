@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Gamepad2, Github, FolderGit2, Boxes, Briefcase, Mic,
-  Mountain, Facebook, Youtube, BookOpen, MapPin, Route,
-  Trophy, Snowflake, MessageCircleQuestion, PenLine, Twitter,
+  Mountain, Youtube, BookOpen, MapPin, Route,
+  Trophy, Snowflake, Share2,
 } from 'lucide-react';
 import { NODES, EXTRA_EDGES, CLUSTER_META, BASE_W, BASE_H, CORE_POS } from '../data/universe.js';
 
@@ -19,16 +19,13 @@ const NODE_ICONS = {
   portfolio: Briefcase,
   'alexa-skills': Mic,
   travel: Mountain,
-  'astonishing-facts': Facebook,
   youtube: Youtube,
   blog: BookOpen,
   'google-maps': MapPin,
   journey: Route,
   competitions: Trophy,
   'advent-of-code': Snowflake,
-  quora: MessageCircleQuestion,
-  medium: PenLine,
-  twitter: Twitter,
+  elsewhere: Share2,
 };
 
 function clamp(v, min, max) {
