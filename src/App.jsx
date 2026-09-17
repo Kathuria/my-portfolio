@@ -56,7 +56,7 @@ function AviVerse() {
   const graphPaused = showIntro || !!activeId;
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[#0B0E14] text-[#F2EFE6]">
+    <main id="main-content" tabIndex={-1} className="h-screen w-screen overflow-hidden bg-[#0B0E14] text-[#F2EFE6]">
       <Starfield />
       <BackgroundStory />
       <UniverseGraph onSelect={select} activeId={activeId} paused={graphPaused} />
@@ -65,6 +65,6 @@ function AviVerse() {
       <SkillSpotlight hidden={graphPaused} />
       <DetailPanel nodeId={activeId} onClose={close} onPortfolioSlotChange={setPortfolioSlot} />
       {showIntro && <IntroOverlay onDismiss={dismissIntro} />}
-    </div>
+    </main>
   );
 }

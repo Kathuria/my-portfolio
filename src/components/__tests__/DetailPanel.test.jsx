@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import DetailPanel from './DetailPanel.jsx';
+import DetailPanel from '../DetailPanel.jsx';
 
 describe('DetailPanel', () => {
   it('renders nothing when nodeId is null', () => {

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   CORE, NODES, EXTRA_EDGES, CLUSTER_META, SKILLS,
   YOUTUBE_PLAYLISTS, ALEXA_SKILLS, BASE_W, BASE_H, CORE_POS,
-} from '../data/universe.js';
+} from '../universe.js';
 
 const VALID_CLUSTERS = new Set(Object.keys(CLUSTER_META));
 

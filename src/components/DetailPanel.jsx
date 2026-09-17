@@ -68,14 +68,14 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="fixed right-0 top-0 z-50 flex h-full w-full max-w-3xl flex-col overflow-hidden border-l"
+        className="fixed inset-x-0 bottom-0 top-0 z-50 flex h-full w-full flex-col overflow-hidden border-l sm:inset-x-auto sm:right-0 sm:max-w-3xl"
         style={{
           background: '#F3ECD9',
           borderColor: '#C9A24B55',
           boxShadow: '-24px 0 60px rgba(0,0,0,0.35)',
         }}
       >
-        <div className="flex items-start justify-between px-8 pt-8">
+        <div className="flex items-start justify-between px-4 pt-6 sm:px-8 sm:pt-8">
           {!isCore && (
             <span
               className="text-[11px] font-medium uppercase tracking-[0.12em]"
@@ -95,7 +95,7 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
           </button>
         </div>
 
-        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-6 pb-6 pt-4 sm:px-8">
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pb-6 pt-4 sm:px-8">
           <div className="shrink-0">
             <h2
               className="text-4xl leading-tight text-[#241a06]"
@@ -336,11 +336,20 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
                     rel="noopener noreferrer"
                     className="group overflow-hidden rounded-lg border border-[#241a06]/15 bg-[#f8f2e5] text-left"
                   >
-                    {videoId ? (
-                      <img src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} alt="" className="aspect-video w-full object-cover transition-transform group-hover:scale-105" loading="lazy" />
-                    ) : (
-                      <div className="flex aspect-video items-center justify-center bg-[#d7c8aa] text-2xl">▶</div>
-                    )}
+                    <div className="relative aspect-video w-full overflow-hidden bg-[#d7c8aa]">
+                      {videoId ? (
+                        <img 
+                          src={`https://img.youtube.com/vi/${videoId}/0.jpg`} 
+                          alt="" 
+                          className="h-full w-full object-cover transition-transform group-hover:scale-105" 
+                          loading="lazy"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                          }}
+                        />
+                      ) : null}
+                      <div className="absolute inset-0 flex items-center justify-center text-4xl text-[#8b7355]/40">▶</div>
+                    </div>
                     <span className="block px-3 py-2 text-xs font-medium leading-snug text-[#241a06]">{playlistTitle}</span>
                   </a>
                 ))}

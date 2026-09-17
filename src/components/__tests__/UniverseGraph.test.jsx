@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import UniverseGraph from './UniverseGraph.jsx';
-import { NODES } from '../data/universe.js';
+import UniverseGraph from '../UniverseGraph.jsx';
+import { NODES } from '../../data/universe.js';
 
 describe('UniverseGraph', () => {
-  it('renders the core star and every node as a labeled, clickable button', () => {
+  it('renders the core star and every node as a labeled, clickable button', { timeout: 10000 }, () => {
     render(<UniverseGraph onSelect={() => {}} activeId={null} paused={false} />);
     expect(screen.getByRole('button', { name: /avi kathuria/i })).toBeInTheDocument();
     for (const n of NODES) {

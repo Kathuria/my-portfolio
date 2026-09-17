@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
+import { NODES, CORE_POS } from '../data/universe.js';
 
 // A quiet, non-interactive starfield. Stars twinkle in place — they do not
 // drift — so they read as sky rather than as decorative confetti. A rare
 // shooting star crosses every so often to keep the background feeling alive
-// without ever demanding attention.
+// without ever demanding attention. Shooting stars now target universe nodes.
 export default function Starfield() {
   const canvasRef = useRef(null);
 
@@ -33,17 +34,38 @@ export default function Starfield() {
     }
 
     function spawnShootingStar() {
-      const fromLeft = Math.random() > 0.5;
-      const startX = fromLeft ? Math.random() * canvas.width * 0.35 : canvas.width - Math.random() * canvas.width * 0.35;
-      const startY = Math.random() * canvas.height * 0.4;
-      const dir = fromLeft ? 1 : -1;
+      // Get current graph transform from global state (set by UniverseGraph)
+      const transform = window.__universeGraphTransform || { zoom: 0.7, panX: 300, panY: 200 };
+      
+      // Pick a random node to target (including the core)
+      const allTargets = [...NODES, { x: CORE_POS.x, y: CORE_POS.y, id: 'avi' }];
+      const target = allTargets[Math.floor(Math.random() * allTargets.length)];
+      
+      // Transform node coordinates to screen coordinates
+      const screenX = target.x * transform.zoom + transform.panX;
+      const screenY = target.y * transform.zoom + transform.panY;
+      
+      // Start from a random edge, aiming at the screen position
+      const fromLeft = screenX < canvas.width / 2;
+      const startX = fromLeft ? -50 - Math.random() * 50 : canvas.width + 50 + Math.random() * 50;
+      const startY = Math.random() * canvas.height * 0.5;
+      
+      // Calculate direction to target screen position
+      const dx = screenX - startX;
+      const dy = screenY - startY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const speed = 400 + Math.random() * 200;
+      
       return {
         x: startX,
         y: startY,
-        vx: dir * (420 + Math.random() * 180),
-        vy: 230 + Math.random() * 130,
+        vx: (dx / distance) * speed,
+        vy: (dy / distance) * speed,
         life: 0,
-        maxLife: 0.85 + Math.random() * 0.35,
+        maxLife: distance / speed,
+        targetId: target.id,
+        targetX: screenX,
+        targetY: screenY,
       };
     }
 
@@ -83,6 +105,20 @@ export default function Starfield() {
           star.x += star.vx * dt;
           star.y += star.vy * dt;
           star.life += dt;
+          
+          // Check if shooting star hit its target
+          const distToTarget = Math.sqrt(
+            Math.pow(star.x - star.targetX, 2) + Math.pow(star.y - star.targetY, 2)
+          );
+          
+          if (distToTarget < 30) {
+            // Trigger aura effect on the target node via global handler
+            if (window.__universeGraphHitHandler) {
+              window.__universeGraphHitHandler(star.targetId);
+            }
+            return false;
+          }
+          
           const alpha = Math.max(0, 1 - star.life / star.maxLife);
           if (alpha <= 0 || star.x < -50 || star.x > canvas.width + 50 || star.y > canvas.height + 50) {
             return false;
@@ -105,7 +141,10 @@ export default function Starfield() {
           ctx.fill();
           return true;
         });
-
+      }
+      
+      // Continue animation loop
+      if (!prefersReducedMotion) {
         frame = requestAnimationFrame(draw);
       }
     }

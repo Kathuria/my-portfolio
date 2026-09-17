@@ -35,10 +35,19 @@ function clamp(v, min, max) {
 function computeFit() {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const zoom = clamp(Math.min(vw / (BASE_W * 0.92), vh / (BASE_H * 0.92)), MIN_ZOOM, 0.85);
-  // Keep the constellation away from the identity plate in the lower-left.
-  const focusX = vw < 700 ? vw * 0.62 : vw * 0.66;
-  const focusY = vw < 700 ? vh * 0.4 : vh * 0.38;
+  
+  // More conservative zoom calculation to prevent cropping
+  // On mobile, ensure the entire graph fits with extra padding
+  const isMobile = vw < 700;
+  const padding = isMobile ? 1.15 : 0.92;
+  const maxZoom = isMobile ? 0.7 : 0.85;
+  const zoom = clamp(Math.min(vw / (BASE_W * padding), vh / (BASE_H * padding)), MIN_ZOOM, maxZoom);
+  
+  // Keep the constellation away from the identity plate in the lower-left on mobile.
+  // On desktop, center it with balanced spacing on both sides.
+  const focusX = isMobile ? vw * 0.5 : vw * 0.5;
+  const focusY = isMobile ? vh * 0.48 : vh * 0.45;
+  
   return {
     zoom,
     panX: focusX - CORE_POS.x * zoom,
@@ -48,8 +57,37 @@ function computeFit() {
 
 export default function UniverseGraph({ onSelect, activeId, paused }) {
   const stageRef = useRef(null);
+  const [hitNodes, setHitNodes] = useState({});
   const [view, setView] = useState(computeFit);
-  const [spotlightId, setSpotlightId] = useState(null);
+  
+  // Handle shooting star hits - trigger aura effect
+  const handleNodeHit = useCallback((nodeId) => {
+    setHitNodes(prev => ({ ...prev, [nodeId]: Date.now() }));
+    // Clear the hit effect after 2 seconds
+    setTimeout(() => {
+      setHitNodes(prev => {
+        const next = { ...prev };
+        delete next[nodeId];
+        return next;
+      });
+    }, 2000);
+  }, []);
+  
+  // Expose hit handler and transform to global scope for shooting stars
+  useEffect(() => {
+    if (window.__universeGraphHitHandler) {
+      return;
+    }
+    window.__universeGraphHitHandler = handleNodeHit;
+    return () => {
+      delete window.__universeGraphHitHandler;
+    };
+  }, [handleNodeHit]);
+  
+  // Update global transform whenever view changes
+  useEffect(() => {
+    window.__universeGraphTransform = view;
+  }, [view]);
   const dragState = useRef({ dragging: false, startX: 0, startY: 0, startPanX: 0, startPanY: 0, moved: false });
   const pendingPanRef = useRef(null);
   const panRafId = useRef(null);
@@ -62,34 +100,8 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  // Every so often, quietly highlight a random star for a few seconds, then
-  // let it fade back to normal — a small "did you notice this?" nudge
-  // rather than anything that demands attention.
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-    let hideTimeout;
-    let cycleTimeout;
-
-    function cycle() {
-      const wait = 7000 + Math.random() * 6000;
-      cycleTimeout = setTimeout(() => {
-        if (!paused) {
-          const candidates = NODES.filter((n) => n.id !== activeId);
-          const pick = candidates[Math.floor(Math.random() * candidates.length)];
-          if (pick) {
-            setSpotlightId(pick.id);
-            hideTimeout = setTimeout(() => setSpotlightId(null), 2800);
-          }
-        }
-        cycle();
-      }, wait);
-    }
-    cycle();
-    return () => {
-      clearTimeout(cycleTimeout);
-      clearTimeout(hideTimeout);
-    };
-  }, [paused, activeId]);
+  // Spotlight effect is now only triggered by shooting stars hitting nodes
+  // Random spotlight disabled to avoid conflicts with shooting star aura effects
 
   const onPointerDown = (e) => {
     if (paused) return;
@@ -244,7 +256,7 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
             e.stopPropagation();
             onSelect('avi');
           }}
-          className="absolute flex flex-col items-center justify-center overflow-hidden rounded-full text-center"
+          className="absolute flex flex-col items-center justify-center overflow-hidden rounded-full text-center cursor-universe-explore"
           style={{
             left: CORE_POS.x - 106,
             top: CORE_POS.y - 106,
@@ -289,7 +301,8 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
         {NODES.map((n) => {
           const color = CLUSTER_META[n.cluster].color;
           const isActive = activeId === n.id;
-          const isSpotlighted = spotlightId === n.id;
+          const isHit = !!hitNodes[n.id];
+          const showAura = isHit;
           const Icon = NODE_ICONS[n.id];
           return (
             <button
@@ -301,7 +314,7 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
                 e.stopPropagation();
                 onSelect(n.id);
               }}
-              className="absolute flex flex-col items-center justify-center rounded-full transition-transform hover:scale-110"
+              className="absolute flex flex-col items-center justify-center rounded-full transition-transform hover:scale-110 cursor-universe-node"
               style={{
                 left: n.x - n.r,
                 top: n.y - n.r,
@@ -312,7 +325,7 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
                 boxShadow: isActive ? `0 0 0 4px ${color}55, 0 0 30px ${color}88` : `0 0 16px ${color}44`,
               }}
             >
-              {isSpotlighted && (
+              {showAura && (
                 <span
                   className="node-aura"
                   style={{ '--aura-color': color }}
@@ -332,13 +345,13 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
       </div>
 
       {/* zoom controls */}
-      <div className="fixed bottom-6 right-6 z-30 flex flex-col gap-2">
+      <div className="fixed bottom-4 right-4 z-30 flex flex-col gap-2 sm:bottom-6 sm:right-6">
         <button
           type="button"
           onPointerDown={(e) => e.stopPropagation()}
           onClick={() => zoomBy(0.15)}
           aria-label="Zoom in"
-          className="h-11 w-11 rounded-full border border-[#C9A24B]/40 bg-[#0B0E14]/80 text-lg text-[#EDE6D6] backdrop-blur hover:border-[#C9A24B]"
+          className="h-11 w-11 rounded-full border border-[#C9A24B]/40 bg-[#0B0E14]/80 text-lg text-[#EDE6D6] backdrop-blur transition-colors hover:border-[#C9A24B] active:bg-[#C9A24B]/20"
         >
           +
         </button>
@@ -347,7 +360,7 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
           onPointerDown={(e) => e.stopPropagation()}
           onClick={() => zoomBy(-0.15)}
           aria-label="Zoom out"
-          className="h-11 w-11 rounded-full border border-[#C9A24B]/40 bg-[#0B0E14]/80 text-lg text-[#EDE6D6] backdrop-blur hover:border-[#C9A24B]"
+          className="h-11 w-11 rounded-full border border-[#C9A24B]/40 bg-[#0B0E14]/80 text-lg text-[#EDE6D6] backdrop-blur transition-colors hover:border-[#C9A24B] active:bg-[#C9A24B]/20"
         >
           −
         </button>
@@ -356,7 +369,7 @@ export default function UniverseGraph({ onSelect, activeId, paused }) {
           onPointerDown={(e) => e.stopPropagation()}
           onClick={fitToViewport}
           aria-label="Recenter"
-          className="h-11 w-11 rounded-full border border-[#C9A24B]/40 bg-[#0B0E14]/80 text-xs text-[#EDE6D6] backdrop-blur hover:border-[#C9A24B]"
+          className="h-11 w-11 rounded-full border border-[#C9A24B]/40 bg-[#0B0E14]/80 text-xl text-[#EDE6D6] backdrop-blur transition-colors hover:border-[#C9A24B] active:bg-[#C9A24B]/20"
         >
           ⟲
         </button>
