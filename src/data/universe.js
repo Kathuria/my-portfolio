@@ -205,8 +205,8 @@ export const NODES = [
     title: 'Flight Memory',
     tagline: '75 flights · 235,000 km travelled',
     description:
-      'An interactive 3D globe experience visualizing years of air travel across 33 airports and 13 airlines. Watch animated flight routes arc across the Earth, replay the journey chronologically, and explore aggregated travel metrics — all while preserving complete privacy. No dates, no booking details, no flight numbers. Just the paths and the distance.',
-    stats: ['75 flight segments', '235,000 km travelled', '33 airports visited'],
+      'An interactive 3D globe experience visualizing years of air travel across 36 airports and 13 airlines. Watch animated flight routes arc across the Earth, replay the journey chronologically, and explore aggregated travel metrics — all while preserving complete privacy. No dates, no booking details, no flight numbers. Just the paths and the distance.',
+    stats: ['75 flight segments', '235,000 km travelled', '36 airports visited'],
     flightMemory: true,
     embedBlocked: true,
   },

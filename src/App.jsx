@@ -28,6 +28,18 @@ function AviVerse() {
   // The landing composition itself explains the site. Help remains available
   // from the dock without covering the first view with an onboarding modal.
   const [showIntro, setShowIntro] = useState(false);
+
+  // Preload flight data in background for faster Flight Memory experience
+  useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        // Preload flight data when browser is idle
+        import('./data/flights.generated.json').catch(() => {
+          // Silent fail - will load on-demand if preload fails
+        });
+      }, { timeout: 5000 });
+    }
+  }, []);
   const [portfolioSlot, setPortfolioSlot] = useState(null);
 
   useEffect(() => {

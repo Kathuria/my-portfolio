@@ -70,7 +70,7 @@ export default function DetailPanel({ nodeId, onClose, onPortfolioSlotChange }) 
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="fixed inset-x-0 bottom-0 top-0 z-50 flex h-full w-full flex-col overflow-hidden border-l sm:inset-x-auto sm:right-0 sm:max-w-3xl"
+        className="fixed inset-x-0 bottom-0 top-0 z-50 flex h-full w-full flex-col overflow-hidden border-l sm:inset-x-auto sm:right-0 sm:max-w-4xl"
         style={{
           background: '#1a1a2e',
           borderColor: '#4a4a6d88',

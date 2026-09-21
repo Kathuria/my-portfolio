@@ -50,9 +50,22 @@ const AIRPORT_DATA: Record<string, { city: string; country: string; latitude: nu
   'COS': { city: 'Colorado Springs', country: 'United States', latitude: 38.8056, longitude: -104.7006 },
   'AUS': { city: 'Austin', country: 'United States', latitude: 30.1945, longitude: -97.6699 },
   'DEL': { city: 'New Delhi', country: 'India', latitude: 28.5562, longitude: 77.1000 },
-  'BOM': { city: 'Pune', country: 'India', latitude: 19.0896, longitude: 72.8656 },
+  'BOM': { city: 'Mumbai', country: 'India', latitude: 19.0896, longitude: 72.8656 },
   'BLR': { city: 'Bangalore', country: 'India', latitude: 13.1979, longitude: 77.7063 },
+  'PNE': { city: 'Pune', country: 'India', latitude: 18.5822, longitude: 73.9197 },
+  'IXC': { city: 'Chandigarh', country: 'India', latitude: 30.6735, longitude: 76.7885 },
+  'TRV': { city: 'Trivandrum', country: 'India', latitude: 8.4821, longitude: 76.9200 },
+  'COK': { city: 'Kochi', country: 'India', latitude: 10.1520, longitude: 76.3919 },
+  'HYD': { city: 'Hyderabad', country: 'India', latitude: 17.2403, longitude: 78.4294 },
+  'LKO': { city: 'Lucknow', country: 'India', latitude: 26.7606, longitude: 80.8893 },
+  'MDW': { city: 'Chicago', country: 'United States', latitude: 41.7868, longitude: -87.7522 },
+  'SJC': { city: 'San Jose', country: 'United States', latitude: 37.3639, longitude: -121.9289 },
+  'DAL': { city: 'Dallas', country: 'United States', latitude: 32.8471, longitude: -96.8518 },
+  'BUF': { city: 'Buffalo', country: 'United States', latitude: 42.9405, longitude: -78.7322 },
+  'GUA': { city: 'Guatemala City', country: 'Guatemala', latitude: 14.5833, longitude: -90.5275 },
   'DXB': { city: 'Dubai', country: 'United Arab Emirates', latitude: 25.2532, longitude: 55.3657 },
+  'DOH': { city: 'Doha', country: 'Qatar', latitude: 25.2732, longitude: 51.6080 },
+  'FRA': { city: 'Frankfurt', country: 'Germany', latitude: 50.0379, longitude: 8.5622 },
 };
 
 interface FlightRoute {
@@ -112,14 +125,27 @@ function generateFlightData(): GeneratedData {
   let longestFlight = { route: '', distanceKm: 0, distanceMiles: 0 };
 
   flights.forEach((flight: any) => {
-    const { origin, destination, airline, distanceKm, distanceMiles } = flight;
+    const { origin, destination, layover, airline, distanceKm, distanceMiles } = flight;
     
-    // Add route
-    routes.push({ from: origin, to: destination });
-    
-    // Track airports
-    airports.add(origin);
-    airports.add(destination);
+    // Handle layover flights: Split into two segments (A→B, B→C)
+    if (layover && layover.trim() !== '') {
+      // First segment: origin → layover
+      routes.push({ from: origin, to: layover });
+      // Second segment: layover → destination
+      routes.push({ from: layover, to: destination });
+      
+      // Track all three airports
+      airports.add(origin);
+      airports.add(layover);
+      airports.add(destination);
+    } else {
+      // Direct flight: origin → destination
+      routes.push({ from: origin, to: destination });
+      
+      // Track airports
+      airports.add(origin);
+      airports.add(destination);
+    }
     
     // Track airlines
     airlines.set(airline, (airlines.get(airline) || 0) + 1);
@@ -131,7 +157,7 @@ function generateFlightData(): GeneratedData {
     // Track longest flight
     if (distanceKm > longestFlight.distanceKm) {
       longestFlight = {
-        route: `${origin} → ${destination}`,
+        route: layover ? `${origin} → ${layover} → ${destination}` : `${origin} → ${destination}`,
         distanceKm,
         distanceMiles
       };
