@@ -9,14 +9,17 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "generate:flights": "python3 scripts/parse-excel.py && npx tsx scripts/generate-flights.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "lucide-react": "^0.563.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "tailwind": "^4.0.0"
+    "react-globe.gl": "^2.38.0",
+    "tailwind": "^4.0.0",
+    "three": "^0.186.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

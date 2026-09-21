@@ -37,8 +37,8 @@ export default function GitHubStatsCard({ username, color }) {
   if (status === 'error') return null;
 
   return (
-    <section className="mt-6 overflow-hidden rounded-xl border border-[#241a06]/15 bg-[#f8f2e5] shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
-      <div className="flex items-center gap-2 border-b border-[#241a06]/10 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.13em] text-[#5c4a22]">
+    <section className="mt-6 overflow-hidden rounded-xl border border-[#eeeef5]/15 bg-[#2f2f47] shadow-[0_10px_25px_rgba(36,26,6,0.12)]">
+      <div className="flex items-center gap-2 border-b border-[#eeeef5]/10 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.13em] text-[#c4c4d8]">
         <GitFork size={13} style={{ color }} /> Live from GitHub
       </div>
       <div className="flex items-center gap-4 p-4">
@@ -50,13 +50,13 @@ export default function GitHubStatsCard({ username, color }) {
             style={{ borderColor: color }}
           />
         ) : (
-          <div className="h-16 w-16 shrink-0 animate-pulse rounded-full bg-[#241a06]/10" />
+          <div className="h-16 w-16 shrink-0 animate-pulse rounded-full bg-[#eeeef5]/10" />
         )}
         <div className="min-w-0 flex-1">
           {status === 'ready' ? (
             <>
-              <p className="truncate text-sm text-[#3a2f18]">{profile.bio || `@${profile.login} on GitHub`}</p>
-              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[#241a06]">
+              <p className="truncate text-sm text-[#c4c4d8]">{profile.bio || `@${profile.login} on GitHub`}</p>
+              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[#eeeef5]">
                 <span className="inline-flex items-center gap-1.5">
                   <GitFork size={14} /> <strong>{profile.public_repos}</strong> repos
                 </span>
@@ -72,8 +72,8 @@ export default function GitHubStatsCard({ username, color }) {
             </>
           ) : (
             <div className="space-y-2">
-              <div className="h-3 w-3/4 animate-pulse rounded bg-[#241a06]/10" />
-              <div className="h-3 w-1/2 animate-pulse rounded bg-[#241a06]/10" />
+              <div className="h-3 w-3/4 animate-pulse rounded bg-[#eeeef5]/10" />
+              <div className="h-3 w-1/2 animate-pulse rounded bg-[#eeeef5]/10" />
             </div>
           )}
         </div>

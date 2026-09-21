@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Gamepad2, Github, FolderGit2, Boxes, Briefcase, Mic,
   Mountain, Youtube, BookOpen, MapPin, Route,
-  Trophy, Snowflake, Share2,
+  Trophy, Snowflake, Share2, Plane, CloudCog, TrendingUp,
 } from 'lucide-react';
 import { NODES, EXTRA_EDGES, CLUSTER_META, BASE_W, BASE_H, CORE_POS } from '../data/universe.js';
 
@@ -18,11 +18,13 @@ const NODE_ICONS = {
   'metals-catalog': Boxes,
   portfolio: Briefcase,
   'alexa-skills': Mic,
+  'sky-tracker': CloudCog,
   travel: Mountain,
+  'flight-memory': Plane,
   youtube: Youtube,
   blog: BookOpen,
   'google-maps': MapPin,
-  journey: Route,
+  journey: TrendingUp,
   competitions: Trophy,
   'advent-of-code': Snowflake,
   elsewhere: Share2,

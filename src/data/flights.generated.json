@@ -1,0 +1,473 @@
+{
+  "metrics": {
+    "totalFlights": 75,
+    "totalDistanceKm": 235209,
+    "totalDistanceMiles": 146155,
+    "uniqueAirports": 33,
+    "uniqueAirlines": 13,
+    "longestFlight": {
+      "route": "DEL → DFW",
+      "distanceKm": 15294,
+      "distanceMiles": 9503
+    },
+    "mostUsedAirline": "Spirit Airlines"
+  },
+  "routes": [
+    {
+      "from": "DFW",
+      "to": "SEA"
+    },
+    {
+      "from": "SEA",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "BOS"
+    },
+    {
+      "from": "BNA",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "BNA"
+    },
+    {
+      "from": "DFW",
+      "to": "JFK"
+    },
+    {
+      "from": "BOS",
+      "to": "DFW"
+    },
+    {
+      "from": "JFK",
+      "to": "DEL"
+    },
+    {
+      "from": "DFW",
+      "to": "JFK"
+    },
+    {
+      "from": "GUA",
+      "to": "ATL"
+    },
+    {
+      "from": "DFW",
+      "to": "DEL"
+    },
+    {
+      "from": "DEL",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "DEL"
+    },
+    {
+      "from": "DEL",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "DEL"
+    },
+    {
+      "from": "DEL",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "DEL"
+    },
+    {
+      "from": "DEL",
+      "to": "DFW"
+    },
+    {
+      "from": "DEN",
+      "to": "DFW"
+    },
+    {
+      "from": "DEN",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "DEN"
+    },
+    {
+      "from": "DFW",
+      "to": "DEN"
+    },
+    {
+      "from": "DFW",
+      "to": "IAH"
+    },
+    {
+      "from": "DFW",
+      "to": "MDW"
+    },
+    {
+      "from": "DFW",
+      "to": "PHL"
+    },
+    {
+      "from": "DFW",
+      "to": "PHX"
+    },
+    {
+      "from": "DTW",
+      "to": "DFW"
+    },
+    {
+      "from": "IAH",
+      "to": "MIA"
+    },
+    {
+      "from": "LAS",
+      "to": "DFW"
+    },
+    {
+      "from": "LGA",
+      "to": "DFW"
+    },
+    {
+      "from": "MDW",
+      "to": "DFW"
+    },
+    {
+      "from": "MIA",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "MIA"
+    },
+    {
+      "from": "DFW",
+      "to": "SAN"
+    },
+    {
+      "from": "DFW",
+      "to": "PHL"
+    },
+    {
+      "from": "PHL",
+      "to": "DFW"
+    },
+    {
+      "from": "PHX",
+      "to": "SAN"
+    },
+    {
+      "from": "SAN",
+      "to": "LAS"
+    },
+    {
+      "from": "DEL",
+      "to": "PNE"
+    },
+    {
+      "from": "PNE",
+      "to": "DEL"
+    },
+    {
+      "from": "IXC",
+      "to": "BLR"
+    },
+    {
+      "from": "DEL",
+      "to": "TRV"
+    },
+    {
+      "from": "COK",
+      "to": "DEL"
+    },
+    {
+      "from": "IXC",
+      "to": "HYD"
+    },
+    {
+      "from": "DEL",
+      "to": "DFW"
+    },
+    {
+      "from": "DEL",
+      "to": "DFW"
+    },
+    {
+      "from": "BNA",
+      "to": "BUF"
+    },
+    {
+      "from": "DAL",
+      "to": "BNA"
+    },
+    {
+      "from": "DAL",
+      "to": "IND"
+    },
+    {
+      "from": "DAL",
+      "to": "BUF"
+    },
+    {
+      "from": "ATL",
+      "to": "DFW"
+    },
+    {
+      "from": "BWI",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "ATL"
+    },
+    {
+      "from": "DFW",
+      "to": "BWI"
+    },
+    {
+      "from": "DFW",
+      "to": "EWR"
+    },
+    {
+      "from": "DFW",
+      "to": "LAX"
+    },
+    {
+      "from": "DFW",
+      "to": "MCO"
+    },
+    {
+      "from": "DFW",
+      "to": "SJC"
+    },
+    {
+      "from": "IAH",
+      "to": "GUA"
+    },
+    {
+      "from": "IND",
+      "to": "DFW"
+    },
+    {
+      "from": "LAX",
+      "to": "DFW"
+    },
+    {
+      "from": "LGA",
+      "to": "DFW"
+    },
+    {
+      "from": "MCO",
+      "to": "DFW"
+    },
+    {
+      "from": "SJC",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "ATL"
+    },
+    {
+      "from": "ATL",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "EWR"
+    },
+    {
+      "from": "LGA",
+      "to": "DFW"
+    },
+    {
+      "from": "DFW",
+      "to": "IND"
+    },
+    {
+      "from": "DFW",
+      "to": "SJC"
+    },
+    {
+      "from": "DFW",
+      "to": "BWI"
+    },
+    {
+      "from": "DFW",
+      "to": "LAX"
+    },
+    {
+      "from": "DFW",
+      "to": "MCO"
+    },
+    {
+      "from": "DFW",
+      "to": "DEL"
+    },
+    {
+      "from": "LKO",
+      "to": "DEL"
+    }
+  ],
+  "airports": {
+    "DFW": {
+      "code": "DFW",
+      "city": "Dallas",
+      "country": "United States",
+      "latitude": 32.8998,
+      "longitude": -97.0403
+    },
+    "SEA": {
+      "code": "SEA",
+      "city": "Seattle",
+      "country": "United States",
+      "latitude": 47.4502,
+      "longitude": -122.3088
+    },
+    "BOS": {
+      "code": "BOS",
+      "city": "Boston",
+      "country": "United States",
+      "latitude": 42.3656,
+      "longitude": -71.0096
+    },
+    "BNA": {
+      "code": "BNA",
+      "city": "Nashville",
+      "country": "United States",
+      "latitude": 36.1263,
+      "longitude": -86.6892
+    },
+    "JFK": {
+      "code": "JFK",
+      "city": "New York",
+      "country": "United States",
+      "latitude": 40.6413,
+      "longitude": -73.7781
+    },
+    "DEL": {
+      "code": "DEL",
+      "city": "New Delhi",
+      "country": "India",
+      "latitude": 28.5562,
+      "longitude": 77.1
+    },
+    "ATL": {
+      "code": "ATL",
+      "city": "Atlanta",
+      "country": "United States",
+      "latitude": 33.6407,
+      "longitude": -84.4277
+    },
+    "DEN": {
+      "code": "DEN",
+      "city": "Denver",
+      "country": "United States",
+      "latitude": 39.8561,
+      "longitude": -104.6737
+    },
+    "IAH": {
+      "code": "IAH",
+      "city": "Houston",
+      "country": "United States",
+      "latitude": 29.9902,
+      "longitude": -95.3368
+    },
+    "PHL": {
+      "code": "PHL",
+      "city": "Philadelphia",
+      "country": "United States",
+      "latitude": 39.8744,
+      "longitude": -75.2424
+    },
+    "PHX": {
+      "code": "PHX",
+      "city": "Phoenix",
+      "country": "United States",
+      "latitude": 33.4352,
+      "longitude": -112.0101
+    },
+    "DTW": {
+      "code": "DTW",
+      "city": "Detroit",
+      "country": "United States",
+      "latitude": 42.2162,
+      "longitude": -83.3554
+    },
+    "MIA": {
+      "code": "MIA",
+      "city": "Miami",
+      "country": "United States",
+      "latitude": 25.7959,
+      "longitude": -80.287
+    },
+    "LAS": {
+      "code": "LAS",
+      "city": "Las Vegas",
+      "country": "United States",
+      "latitude": 36.084,
+      "longitude": -115.1537
+    },
+    "LGA": {
+      "code": "LGA",
+      "city": "New York",
+      "country": "United States",
+      "latitude": 40.7769,
+      "longitude": -73.874
+    },
+    "SAN": {
+      "code": "SAN",
+      "city": "San Diego",
+      "country": "United States",
+      "latitude": 32.7338,
+      "longitude": -117.1933
+    },
+    "BLR": {
+      "code": "BLR",
+      "city": "Bangalore",
+      "country": "India",
+      "latitude": 13.1979,
+      "longitude": 77.7063
+    },
+    "IND": {
+      "code": "IND",
+      "city": "Indianapolis",
+      "country": "United States",
+      "latitude": 39.7173,
+      "longitude": -86.2944
+    },
+    "BWI": {
+      "code": "BWI",
+      "city": "Baltimore",
+      "country": "United States",
+      "latitude": 39.1774,
+      "longitude": -76.6684
+    },
+    "EWR": {
+      "code": "EWR",
+      "city": "Newark",
+      "country": "United States",
+      "latitude": 40.6895,
+      "longitude": -74.1745
+    },
+    "LAX": {
+      "code": "LAX",
+      "city": "Los Angeles",
+      "country": "United States",
+      "latitude": 33.9416,
+      "longitude": -118.4085
+    },
+    "MCO": {
+      "code": "MCO",
+      "city": "Orlando",
+      "country": "United States",
+      "latitude": 28.4312,
+      "longitude": -81.3081
+    }
+  }
+}

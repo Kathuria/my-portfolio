@@ -1,9 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const WAVES = [
   'M-80 180 C180 40 350 315 610 165 S1050 20 1360 175 S1710 300 1800 105',
   'M-100 440 C120 300 355 555 630 405 S1070 245 1400 430 S1680 520 1810 350',
   'M-90 715 C180 555 355 830 610 680 S1080 515 1360 700 S1660 835 1810 625',
+];
+
+const ROLES = [
+  'Technical Lead',
+  'Traveler',
+  'Explorer',
+  'Photographer',
+  'Google Maps Contributor',
+  'AI Enthusiast',
+  'Software Engineer',
 ];
 
 // Avi's name in the languages of the places and people this site touches.
@@ -61,7 +71,29 @@ function NameLane({ x, duration, delay, startIndex }) {
 }
 
 export default function BackgroundStory() {
+  const svgRef = useRef(null);
   const textPathRefs = useRef([]);
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  // Rotate through roles with fumes/smoke effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Fade out to smoke (disappear completely)
+      setIsFading(true);
+      setTimeout(() => {
+        // Change role while invisible (smoke moment)
+        setCurrentRoleIndex((prev) => (prev + 1) % ROLES.length);
+        // Brief pause in smoke state
+        setTimeout(() => {
+          // Materialize from smoke (fade in)
+          setIsFading(false);
+        }, 200); // 200ms smoke/empty state
+      }, 800); // 800ms fade out duration
+    }, 3500); // 3.5s total cycle
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -133,7 +165,19 @@ export default function BackgroundStory() {
           <span>Avi</span>
           <span>Verse</span>
         </h1>
-        <p className="universe-byline">Avi Kathuria · engineer, traveler, explorer</p>
+        <p className="universe-byline">
+          Avi Kathuria · {' '}
+          <span
+            style={{
+              opacity: isFading ? 0 : 1,
+              transition: 'opacity 800ms ease-in-out',
+              display: 'inline-block',
+              minWidth: '200px',
+            }}
+          >
+            {ROLES[currentRoleIndex]}
+          </span>
+        </p>
       </div>
 
     </div>

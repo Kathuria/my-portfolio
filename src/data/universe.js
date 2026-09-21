@@ -93,6 +93,19 @@ export const NODES = [
     links: [{ label: 'See all on GitHub', url: 'https://github.com/Kathuria/Kathuria' }],
     noPreview: true,
   },
+  {
+    id: 'sky-tracker',
+    cluster: 'build',
+    x: 520,
+    y: 200,
+    r: 26,
+    title: 'Sky Tracker',
+    tagline: 'Intelligent flight data consolidation platform',
+    description:
+      'An advanced flight tracking and management system that consolidates booking confirmations, boarding passes, and travel itineraries into a unified dashboard. Automatically extracts flight details from emails and PDFs, visualizes routes, tracks loyalty programs, and provides intelligent insights on travel patterns. Built to solve the chaos of managing multiple airline bookings across different carriers.',
+    links: [{ label: 'Open Sky Tracker', url: 'https://flight-consolidator.vercel.app' }],
+    embed: true,
+  },
 
   // ---------- TRAVEL ----------
   {
@@ -183,6 +196,20 @@ export const NODES = [
       'Years of long-form travel writing, chronicling journeys across India long before it was fashionable to blog about them.',
     links: [{ label: 'Read the blog', url: 'https://tribute-to-india.blogspot.com' }],
   },
+  {
+    id: 'flight-memory',
+    cluster: 'travel',
+    x: 560,
+    y: 660,
+    r: 32,
+    title: 'Flight Memory',
+    tagline: '75 flights · 235,000 km travelled',
+    description:
+      'An interactive 3D globe experience visualizing years of air travel across 33 airports and 13 airlines. Watch animated flight routes arc across the Earth, replay the journey chronologically, and explore aggregated travel metrics — all while preserving complete privacy. No dates, no booking details, no flight numbers. Just the paths and the distance.',
+    stats: ['75 flight segments', '235,000 km travelled', '33 airports visited'],
+    flightMemory: true,
+    embedBlocked: true,
+  },
 
   // ---------- PLACES ----------
   {
@@ -208,20 +235,21 @@ export const NODES = [
   },
   {
     id: 'journey',
-    cluster: 'build',
+    cluster: 'journey',
     x: 960,
     y: 825,
     r: 30,
-    title: 'Journey',
-    tagline: 'A timeline of the technical career',
+    title: 'Career',
+    tagline: 'A timeline of the professional journey',
     description:
-      'The engineering path — from software trainee to technical lead, across three companies and two countries.',
+      'The career path — from software trainee to technical lead, across three companies and two countries. A journey of continuous growth, learning, and impact.',
     timeline: [
-      ['2011–2015', 'B.Tech, Computer Science — Chandigarh Group of Colleges'],
-      ['Jan 2015 – Jun 2015', 'Software Trainee — Aricent, Gurgaon'],
-      ['Nov 2015 – 2018', 'Associate QA Engineer — Sapient Global Markets, Noida'],
-      ['2018–2022', 'Associate → Senior Associate — Publicis Sapient, Noida'],
-      ['2022–2026', 'Technical Lead — Publicis Sapient, Dallas, TX'],
+      ['2011–2015', 'B.Tech, Computer Science — Chandigarh Group of Colleges, India'],
+      ['Jan 2015 – Jun 2015', 'Software Trainee — Aricent, Gurgaon, India'],
+      ['Nov 2015 – 2018', 'Associate QA Engineer — Sapient Global Markets, Noida, India'],
+      ['2018–2022', 'Associate → Senior Associate — Publicis Sapient, Noida, India'],
+      ['2022–2026', 'Technical Lead — Publicis Sapient, Dallas, TX, USA'],
+      ['2026 – Present', 'Technical Lead — India'],
     ],
     links: [{ label: 'View full history on LinkedIn', url: 'https://www.linkedin.com/in/avi-kathuria-6b222763/' }],
     noPreview: true,
@@ -332,14 +360,14 @@ export const EXTRA_EDGES = [
 
 export const CLUSTER_META = {
   // `color` is used for glows/lines/fills on the dark background (already
-  // high contrast there). `textColor` is a darker variant used only where
-  // the color renders as text/labels on the light parchment panel —
-  // verified against WCAG AAA (7:1) with an actual contrast calculation;
-  // the original vivid colors measured as low as 1.7:1 as text there.
-  build: { label: 'Build', color: '#5EC8C0', textColor: '#275451' },
-  travel: { label: 'Travel', color: '#E08D3C', textColor: '#6c441d' },
-  places: { label: 'Places', color: '#8FB37E', textColor: '#42523a' },
-  share: { label: 'Share', color: '#B18CD2', textColor: '#584669' },
+  // high contrast there). `textColor` is used for text/labels in the drawer —
+  // now optimized for the Cosmic Purple background (#1a1a2e)
+  // All textColor values maintain WCAG AAA contrast on purple drawer
+  build: { label: 'Build', color: '#5EC8C0', textColor: '#5EC8C0' },
+  travel: { label: 'Travel', color: '#E08D3C', textColor: '#E08D3C' },
+  places: { label: 'Places', color: '#8FB37E', textColor: '#8FB37E' },
+  share: { label: 'Share', color: '#B18CD2', textColor: '#B18CD2' },
+  journey: { label: 'Journey', color: '#D4A574', textColor: '#D4A574' },
 };
 
 export const BASE_W = 1600;
@@ -351,5 +379,5 @@ export const CORE_POS = { x: 800, y: 500 };
 // spotlight that appears in the corner of the screen.
 export const SKILLS = [
   'React', 'TypeScript', 'Node.js', 'Next.js', 'AWS',
-  'GraphQL', 'Microservices', 'CI/CD', 'Tailwind CSS', 'Supabase',
+  'GraphQL', 'Microservices', 'CI/CD', 'Bootstrap' ,'Tailwind CSS', 'Supabase',
 ];
