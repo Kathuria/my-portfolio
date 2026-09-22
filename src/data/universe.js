@@ -117,8 +117,8 @@ export const NODES = [
     title: 'Travel Atlas',
     tagline: 'Photographs and field notes from the road',
     description:
-      'A visual record of 28+ U.S. states and nine national parks — separate from the YouTube travel channel and the long-form blog.',
-    stats: ['28+ U.S. states covered', '9 national parks visited'],
+      'A visual record of 21 U.S. states and nine national parks — separate from the YouTube travel channel and the long-form blog.',
+    stats: ['21 U.S. states covered', '9 national parks visited'],
     image: '/images/national-parks-panorama.png',
     parkGroups: [
       ['Washington', ['Mount Rainier National Park']],

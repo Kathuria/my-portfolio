@@ -13,6 +13,7 @@ An interactive 3D graph experience where each node represents a different aspect
 ## 🌟 Features
 
 ### Core Experience
+
 - **3D Force Graph** - Interactive node-based navigation with physics simulation
 - **Dynamic Panels** - Rich detail views with live GitHub stats, embedded content, and metrics
 - **Starfield Background** - Animated shooting stars with node-targeted effects
@@ -20,15 +21,17 @@ An interactive 3D graph experience where each node represents a different aspect
 - **Responsive Design** - Optimized for desktop, tablet, and mobile devices
 
 ### Notable Nodes
+
 - **Engineering** - Live GitHub stats and 10+ years of technical experience
 - **Flight Memory** - Interactive 3D globe with 75+ flight routes across 33 airports
 - **Google Maps** - Level 8 Local Guide with 52M+ photo views
-- **Travel Atlas** - 28+ U.S. states and 9 national parks documented
+- **Travel Atlas** - 21 U.S. states and 9 national parks documented
 - **Projects** - Pokédex, Metals Catalog, Alexa Skills, and more
 
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+ and npm
 - Python 3.8+ (for flight data generation)
 
@@ -118,6 +121,7 @@ my-portfolio/
 ## 📝 Data Sources
 
 All content is sourced from real data:
+
 - GitHub API for live repository stats
 - Google Maps profile (52M+ photo views)
 - YouTube playlists and video metadata
