@@ -95,7 +95,7 @@ export default function PSFinalCommit() {
 
           {/* Massive Numbers */}
           <div className="hero-numbers-container">
-            <div className="flex items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20">
+            <div className="flex items-center justify-center gap-4 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20">
               <div className="hero-number-group animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <div className="hero-massive-number">10</div>
                 <div className="hero-label">Years</div>
@@ -114,9 +114,9 @@ export default function PSFinalCommit() {
           </div>
 
           {/* Tagline + Scroll Arrow - 100px below 10.10.10 */}
-          <div className="mt-[100px] flex flex-col items-center gap-6">
+          <div className="mt-[100px] flex flex-col items-center gap-6 text-center">
             {/* Subtitle */}
-            <p className="hero-subtitle animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
+            <p className="hero-subtitle animate-fade-in-up px-4" style={{ animationDelay: '1.2s' }}>
               A Journey of Innovation, Growth, and Impact
             </p>
 
@@ -140,7 +140,7 @@ export default function PSFinalCommit() {
       >
         <div className="max-w-6xl mx-auto w-full">
           <div className={`transition-all duration-1000 ${isVisible['journey-summary'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-            <h2 className="section-title mb-20">The Journey</h2>
+            <h2 className="section-title mb-20 text-center md:text-left">The Journey</h2>
             
             {/* Timeline */}
             <div className="space-y-16 relative">
@@ -152,10 +152,10 @@ export default function PSFinalCommit() {
                 <div className="timeline-marker" />
                 <div className="timeline-content">
                   <div className="timeline-label">Company</div>
-                  <div className="timeline-value">
-                    Sapient Global Markets
-                    <span className="timeline-arrow">→</span>
-                    Publicis Sapient
+                  <div className="w-full flex flex-col md:flex-row justify-center md:justify-start items-center gap-2 md:gap-6 text-center md:text-left font-light" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, sans-serif', fontSize: 'clamp(1.25rem, 3vw, 2rem)', letterSpacing: '-0.01em' }}>
+                    <span>Sapient Global Markets</span>
+                    <span className="opacity-30 text-2xl md:rotate-0 rotate-90">→</span>
+                    <span>Publicis Sapient</span>
                   </div>
                 </div>
               </div>
@@ -165,12 +165,12 @@ export default function PSFinalCommit() {
                 <div className="timeline-marker" />
                 <div className="timeline-content">
                   <div className="timeline-label">Locations</div>
-                  <div className="timeline-value">
-                    Gurugram
-                    <span className="timeline-arrow">→</span>
-                    Noida
-                    <span className="timeline-arrow">→</span>
-                    Dallas
+                  <div className="w-full flex flex-col md:flex-row justify-center md:justify-start items-center gap-2 md:gap-6 text-center md:text-left font-light" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, sans-serif', fontSize: 'clamp(1.25rem, 3vw, 2rem)', letterSpacing: '-0.01em' }}>
+                    <span>Gurugram</span>
+                    <span className="opacity-30 text-2xl md:rotate-0 rotate-90">→</span>
+                    <span>Noida</span>
+                    <span className="opacity-30 text-2xl md:rotate-0 rotate-90">→</span>
+                    <span>Dallas</span>
                   </div>
                 </div>
               </div>
@@ -180,15 +180,15 @@ export default function PSFinalCommit() {
                 <div className="timeline-marker" />
                 <div className="timeline-content">
                   <div className="timeline-label">Role Evolution</div>
-                  <div className="timeline-value flex flex-col gap-2">
+                  <div className="timeline-value-roles">
                     <div className="timeline-role">Associate QA</div>
-                    <div className="timeline-arrow rotate-90">→</div>
+                    <div className="timeline-arrow-role">↓</div>
                     <div className="timeline-role">Associate QA L2</div>
-                    <div className="timeline-arrow rotate-90">→</div>
+                    <div className="timeline-arrow-role">↓</div>
                     <div className="timeline-role">Associate Experience Technology Level 2</div>
-                    <div className="timeline-arrow rotate-90">→</div>
+                    <div className="timeline-arrow-role">↓</div>
                     <div className="timeline-role">Senior Associate Experience Technology</div>
-                    <div className="timeline-arrow rotate-90">→</div>
+                    <div className="timeline-arrow-role">↓</div>
                     <div className="timeline-role timeline-role-final">Lead Experience Engineer</div>
                   </div>
                 </div>
@@ -199,10 +199,10 @@ export default function PSFinalCommit() {
                 <div className="timeline-marker" />
                 <div className="timeline-content">
                   <div className="timeline-label">Career Path</div>
-                  <div className="timeline-value">
-                    QA
-                    <span className="timeline-arrow">→</span>
-                    Development
+                  <div className="w-full flex flex-col md:flex-row justify-center md:justify-start items-center gap-2 md:gap-6 text-center md:text-left font-light" style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, sans-serif', fontSize: 'clamp(1.25rem, 3vw, 2rem)', letterSpacing: '-0.01em' }}>
+                    <span>QA</span>
+                    <span className="opacity-30 text-2xl md:rotate-0 rotate-90">→</span>
+                    <span>Development</span>
                   </div>
                 </div>
               </div>
@@ -306,10 +306,10 @@ export default function PSFinalCommit() {
 
         @keyframes bounce-slow {
           0%, 100% {
-            transform: translateX(-50%) translateY(0);
+            transform: translateY(0);
           }
           50% {
-            transform: translateX(-50%) translateY(-10px);
+            transform: translateY(-10px);
           }
         }
 
@@ -398,11 +398,13 @@ export default function PSFinalCommit() {
           padding-left: 0;
           animation: fade-in-up 0.8s ease-out forwards;
           opacity: 0;
+          text-align: center;
         }
 
         @media (min-width: 768px) {
           .timeline-item {
             padding-left: 6rem;
+            text-align: left;
           }
         }
 
@@ -443,6 +445,30 @@ export default function PSFinalCommit() {
           align-items: center;
           flex-wrap: wrap;
           gap: clamp(0.75rem, 2vw, 1.5rem);
+          justify-content: center;
+          text-align: center;
+        }
+
+        @media (min-width: 768px) {
+          .timeline-value {
+            justify-content: flex-start;
+            text-align: left;
+          }
+        }
+
+        .timeline-value span {
+          text-align: center;
+          display: inline-block;
+        }
+
+        @media (min-width: 768px) {
+          .timeline-value span {
+            text-align: left;
+          }
+        }
+
+        .timeline-content {
+          width: 100%;
         }
 
         .timeline-arrow {
@@ -450,10 +476,41 @@ export default function PSFinalCommit() {
           font-size: 1.5rem;
         }
 
+        .timeline-value-roles {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+          .timeline-value-roles {
+            align-items: flex-start;
+          }
+        }
+
+        .timeline-arrow-role {
+          opacity: 0.3;
+          font-size: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+          .timeline-arrow-role {
+            margin-left: 2rem;
+          }
+        }
+
         .timeline-role {
           font-size: clamp(0.875rem, 2vw, 1.125rem);
-          opacity: 0.7;
+          opacity: 1;
           font-weight: 300;
+          text-align: center;
+        }
+
+        @media (min-width: 768px) {
+          .timeline-role {
+            text-align: left;
+          }
         }
 
         .timeline-role-final {
