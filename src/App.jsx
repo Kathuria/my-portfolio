@@ -19,7 +19,7 @@ function readHash() {
 }
 
 export default function App() {
-  const isPSFinalCommit = window.location.pathname === '/ps-final-commit' || window.location.pathname === '/ps-final-commit/';
+  const isPSFinalCommit = window.location.pathname === '/ps-final-commit' || window.location.pathname === '/ps-final-commit/' || new URLSearchParams(window.location.search).get('view') === 'ps-final-commit';
   if (isPSFinalCommit) return <PSFinalCommit />;
   
   const isLegacy = window.location.pathname === '/legacy' || window.location.pathname === '/legacy/' || new URLSearchParams(window.location.search).get('view') === 'legacy';
