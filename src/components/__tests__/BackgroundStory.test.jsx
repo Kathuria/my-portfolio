@@ -24,7 +24,8 @@ describe('BackgroundStory', () => {
     expect(screen.getByText('A map, not a resume')).toBeInTheDocument();
     expect(screen.getByText('Avi')).toBeInTheDocument();
     expect(screen.getByText('Verse')).toBeInTheDocument();
-    expect(screen.getByText('Avi Kathuria · engineer, traveler, explorer')).toBeInTheDocument();
+    // Check for the name in the byline (the rotating text is dynamically shown)
+    expect(screen.getByText(/Avi Kathuria/)).toBeInTheDocument();
   });
 
   it('renders SVG with correct waves', () => {
