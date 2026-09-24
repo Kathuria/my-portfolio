@@ -6,6 +6,21 @@ export default function PSFinalCommit() {
   const playerRef = useRef(null);
 
   useEffect(() => {
+    // Set page title and ensure favicon is loaded
+    document.title = '10.10.10 - PS Final Commit | Avi Kathuria';
+    
+    // Ensure favicon link exists
+    let favicon = document.querySelector('link[rel="icon"]');
+    if (!favicon) {
+      favicon = document.createElement('link');
+      favicon.rel = 'icon';
+      favicon.type = 'image/png';
+      favicon.href = '/ak.png';
+      document.head.appendChild(favicon);
+    }
+  }, []);
+
+  useEffect(() => {
     // Intersection Observer for scroll animations
     observerRef.current = new IntersectionObserver(
       (entries) => {
