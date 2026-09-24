@@ -8,6 +8,7 @@ import ContactDock from './components/ContactDock.jsx';
 import PortfolioPreview from './components/PortfolioPreview.jsx';
 import SkillSpotlight from './components/SkillSpotlight.jsx';
 import LegacyApp from './legacy/LegacyApp.jsx';
+import PSFinalCommit from './PSFinalCommit.jsx';
 import { NODES } from './data/universe.js';
 
 const VALID_IDS = new Set(['avi', ...NODES.map((n) => n.id)]);
@@ -18,8 +19,12 @@ function readHash() {
 }
 
 export default function App() {
+  const isPSFinalCommit = window.location.pathname === '/ps-final-commit' || window.location.pathname === '/ps-final-commit/';
+  if (isPSFinalCommit) return <PSFinalCommit />;
+  
   const isLegacy = window.location.pathname === '/legacy' || window.location.pathname === '/legacy/' || new URLSearchParams(window.location.search).get('view') === 'legacy';
   if (isLegacy) return <LegacyApp />;
+  
   return <AviVerse />;
 }
 
