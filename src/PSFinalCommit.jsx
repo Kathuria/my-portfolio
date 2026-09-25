@@ -181,6 +181,8 @@ export default function PSFinalCommit() {
                 <div className="timeline-content">
                   <div className="timeline-label">Role Evolution</div>
                   <div className="timeline-value-roles">
+                    <div className="timeline-role">Junior Associate QA</div>
+                    <div className="timeline-arrow-role">↓</div>
                     <div className="timeline-role">Associate QA</div>
                     <div className="timeline-arrow-role">↓</div>
                     <div className="timeline-role">Associate QA L2</div>
