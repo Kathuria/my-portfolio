@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Flight data - never commit
+flights.xlsx
+flights-temp.json
+analyze_flights.py

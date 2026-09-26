@@ -267,7 +267,7 @@ export default function PSFinalCommit() {
                   <iframe
                     id="youtube-player"
                     className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube.com/embed/4hDOyYEJ9-Q?autoplay=0&mute=0&controls=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+                    src="https://www.youtube.com/embed/Ba4igNWzE_U?autoplay=0&mute=0&controls=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
                     title="Journey Glimpse - 10 Years, 10 Months, 10 Days"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen

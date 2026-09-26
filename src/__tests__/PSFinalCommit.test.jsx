@@ -167,7 +167,7 @@ describe('PSFinalCommit', () => {
       render(<PSFinalCommit />);
       const iframe = document.getElementById('youtube-player');
       const src = iframe?.getAttribute('src');
-      expect(src).toContain('youtube.com/embed/4hDOyYEJ9-Q');
+      expect(src).toContain('youtube.com/embed/Ba4igNWzE_U');
       expect(src).toContain('autoplay=0');
       expect(src).toContain('mute=0');
       expect(src).toContain('controls=1');
