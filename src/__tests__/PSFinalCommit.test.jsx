@@ -116,7 +116,7 @@ describe('PSFinalCommit', () => {
       expect(screen.getByText('Role Evolution')).toBeInTheDocument();
       expect(screen.getByText('Associate QA')).toBeInTheDocument();
       expect(screen.getByText('Associate QA L2')).toBeInTheDocument();
-      expect(screen.getByText('Associate Experience Technology Level 2')).toBeInTheDocument();
+      expect(screen.getByText('Associate Experience Technology L2')).toBeInTheDocument();
       expect(screen.getByText('Senior Associate Experience Technology')).toBeInTheDocument();
       expect(screen.getByText('Lead Experience Engineer')).toBeInTheDocument();
     });
@@ -316,7 +316,7 @@ describe('PSFinalCommit', () => {
       render(<PSFinalCommit />);
       expect(screen.getByText('Associate QA')).toBeInTheDocument();
       expect(screen.getByText('Associate QA L2')).toBeInTheDocument();
-      expect(screen.getByText('Associate Experience Technology Level 2')).toBeInTheDocument();
+      expect(screen.getByText('Associate Experience Technology L2')).toBeInTheDocument();
       expect(screen.getByText('Senior Associate Experience Technology')).toBeInTheDocument();
       expect(screen.getByText('Lead Experience Engineer')).toBeInTheDocument();
     });
