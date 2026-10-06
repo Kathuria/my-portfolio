@@ -149,7 +149,7 @@ This is a personal portfolio project. Feel free to draw inspiration, but please 
 
 - **Portfolio:** [kathuria.github.io](https://kathuria.github.io/)
 - **GitHub:** [@Kathuria](https://github.com/Kathuria)
-- **LinkedIn:** [Avi Kathuria](https://www.linkedin.com/in/avi-kathuria-6b222763/)
+- **LinkedIn:** [Avi Kathuria](https://www.linkedin.com/in/avi-kathuria)
 
 ---
 

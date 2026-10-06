@@ -315,7 +315,7 @@ export default function Portfolio() {
                   <Mail size={20} />
                   Get in Touch
                 </a>
-                <a href="https://www.linkedin.com/in/avi-kathuria-6b222763/" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.linkedin.com/in/avi-kathuria" target="_blank" rel="noopener noreferrer"
                    className="px-8 py-4 bg-white/80 backdrop-blur-xl text-gray-800 rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 border border-gray-200">
                   <Linkedin size={20} />
                   LinkedIn
@@ -463,7 +463,7 @@ export default function Portfolio() {
             </div>
           </div>
           <div className="flex gap-3">
-            <a href="https://www.linkedin.com/in/avi-kathuria-6b222763/" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.linkedin.com/in/avi-kathuria" target="_blank" rel="noopener noreferrer"
                className="w-11 h-11 rounded-xl bg-blue-600/20 backdrop-blur-xl border border-blue-500/30 flex items-center justify-center hover:bg-blue-600/30 transition-all hover:scale-110">
               <Linkedin size={20} />
             </a>

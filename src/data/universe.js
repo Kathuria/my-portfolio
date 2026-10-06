@@ -251,7 +251,7 @@ export const NODES = [
       ['2022–2026', 'Technical Lead — Publicis Sapient, Dallas, TX, USA'],
       ['2026 – Present', 'Technical Lead — India'],
     ],
-    links: [{ label: 'View full history on LinkedIn', url: 'https://www.linkedin.com/in/avi-kathuria-6b222763/' }],
+    links: [{ label: 'View full history on LinkedIn', url: 'https://www.linkedin.com/in/avi-kathuria' }],
     noPreview: true,
   },
   {

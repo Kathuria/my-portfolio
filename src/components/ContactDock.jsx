@@ -15,7 +15,7 @@ export default function ContactDock({ onHelp }) {
 
       <div className="fixed right-3 top-3 z-30 flex flex-wrap items-center justify-end gap-2 sm:right-6 sm:top-6 sm:gap-3">
         <a
-          href="https://www.linkedin.com/in/avi-kathuria-6b222763/"
+          href="https://www.linkedin.com/in/avi-kathuria"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"

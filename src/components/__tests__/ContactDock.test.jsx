@@ -12,7 +12,7 @@ describe('ContactDock', () => {
     render(<ContactDock onHelp={() => {}} />);
     
     const linkedinLink = screen.getByRole('link', { name: /linkedin/i });
-    expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/avi-kathuria-6b222763/');
+    expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/avi-kathuria');
     expect(linkedinLink).toHaveAttribute('target', '_blank');
     expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer');
 
